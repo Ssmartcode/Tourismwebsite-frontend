@@ -1,0 +1,22 @@
+.input-group {
+  margin-bottom: 1rem;
+}
+input {
+  display: inline-block;
+  min-width: 100%;
+  font-size: 1.2rem;
+  padding: 0.5rem 0.25rem;
+  color: #333;
+  border: rgba(50, 50, 50, 0.3);
+  box-shadow: 7px 7px 5px rgba(50, 50, 50, 0.1);
+}
+input.invalid {
+  border: 2px solid rgba(236, 77, 77, 0.7);
+  outline-color: rgba(236, 77, 77, 0.7);
+}
+.input-error {
+  color: rgba(236, 77, 77, 0.7);
+  text-align: center;
+  font-size: 1rem;
+  margin-top: 0.35rem;
+}

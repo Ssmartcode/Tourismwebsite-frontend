@@ -1,0 +1,16 @@
+#america {
+  animation: continent alternate 1s infinite;
+}
+#europe {
+  animation: continent alternate 1s infinite 1s;
+}
+
+@keyframes continent {
+  100% {
+    fill: var(--accent-color);
+  }
+}
+@keyframes cursor {
+  0% {
+  }
+}

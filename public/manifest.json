@@ -1,0 +1,8 @@
+{
+  "short_name": "Tourism Website",
+  "name": "Tourism offers for your vacations",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

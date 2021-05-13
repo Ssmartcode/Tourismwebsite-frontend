@@ -1,0 +1,21 @@
+.image-upload {
+  text-align: center;
+}
+.image-upload-box {
+  border: rgba(50, 50, 50, 0.3);
+  box-shadow: 7px 7px 5px rgba(50, 50, 50, 0.1);
+  background: #fff;
+  color: #333;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.2rem;
+  min-width: 30%;
+  margin-bottom: 1rem;
+  padding: 0.5rem 0.25rem;
+}
+.image-preview {
+  margin-bottom: 1rem;
+}
+.image-preview img {
+  width: 100%;
+}
