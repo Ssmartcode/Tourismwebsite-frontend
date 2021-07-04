@@ -4,7 +4,7 @@ nav {
 }
 nav a {
   font-size: 1.3rem;
-  padding: 2rem 1rem !important;
+  padding: 1.5rem 1rem !important;
   transition: all 0.4s !important;
   font-weight: 900;
 }
@@ -13,9 +13,40 @@ nav a:hover {
   color: #f4f4f4 !important;
 }
 .navbar-brand {
-  width: 100px;
+  width: 90px;
   padding: 0;
 }
 .navbar-brand img {
   width: 100%;
+}
+.dropdown-menu {
+  border-radius: 0 0 5px 5px;
+}
+.dropdown-menu a:hover {
+  color: #333 !important;
+}
+.moving-navigation {
+  background: #fff;
+  border: 3px solid var(--seconday-color);
+  border-top: none;
+  color: #333;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 450px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: -225px;
+  z-index: 1000;
+}
+.moving-navigation a {
+  background: none !important;
+}
+.moving-navigation a:hover {
+  color: var(--seconday-color) !important;
+}
+.moving-navigation img {
+  width: 60px;
 }

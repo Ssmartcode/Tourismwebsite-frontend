@@ -7,7 +7,6 @@ const useHttpRequest = () => {
 
   const sendRequest = useCallback(
     async (method, url, data = {}, headers = {}) => {
-      console.log("Not all inputs are valid");
       setIsLoading(true);
       try {
         const response = await axios({
@@ -20,6 +19,7 @@ const useHttpRequest = () => {
         setError(null);
         return response;
       } catch (err) {
+        console.log(err);
         setError(err.response.data.message);
       }
       setIsLoading(false);

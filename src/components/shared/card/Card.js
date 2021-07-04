@@ -4,11 +4,12 @@ import { Link } from "react-router-dom";
 import "./Card.css";
 
 const Card = (props) => {
+  const category = props.category.split("-").join(" ");
   return (
     <div className={`offer-card ${props.className}`}>
       <div className="header">
         <img src={`${process.env.REACT_APP_BACKEND}/${props.image}`} alt="" />
-        <div className="category">{props.category}</div>
+        <div className="category">{category}</div>
         <div className="description">
           <div className="title">{props.title}</div>
           <div className="period">{props.period}</div>

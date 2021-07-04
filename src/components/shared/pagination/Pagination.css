@@ -1,0 +1,15 @@
+.page-link {
+  background-color: #f4f4f4;
+  cursor: pointer;
+  color: #333;
+}
+.page-link:hover,
+.page-link.active {
+  color: #fff !important;
+  background-color: var(--seconday-color);
+}
+.page-link.disabled {
+  cursor: default;
+  background-color: #ccc;
+  color: #333 !important;
+}

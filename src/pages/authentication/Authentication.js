@@ -3,9 +3,9 @@ import useFormValidation from "../../hooks/useFormValidation";
 // context
 import AuthContext from "../../context/authContext";
 // components
-import Input from "../../components/shared/input/Input";
+import Input from "../../components/shared/Inputs/input/Input";
 // css
-import "./Account.css";
+import "./Authentication.css";
 import useHttpRequest from "../../hooks/useHttpRequest";
 import Alert from "../../components/shared/alert/Alert";
 import Spinner from "../../components/shared/spinner/Spinner";
@@ -35,17 +35,18 @@ const Signup = () => {
     e.preventDefault();
     setRequestResponse(null);
     let response;
-    if (allInputsValid(validationState.current)) {
-      const route = isSignupMode ? "signup" : "login";
-      response = await sendRequest(
-        "POST",
-        `${process.env.REACT_APP_BACKEND}/users/${route}`,
-        {
-          userName,
-          userPassword,
-        }
-      );
-    }
+    // ! UNCOMMENT THIS LATER
+    // if (allInputsValid(validationState.current)) {
+    const route = isSignupMode ? "signup" : "login";
+    response = await sendRequest(
+      "POST",
+      `${process.env.REACT_APP_BACKEND}/users/${route}`,
+      {
+        userName,
+        userPassword,
+      }
+    );
+    // !}
     if (response) {
       isLoginMode &&
         authContext.logIn(response.data.token, response.data.userId);

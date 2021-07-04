@@ -6,7 +6,7 @@ import AuthContext from "../../../context/authContext";
 import useHttpRequest from "../../../hooks/useHttpRequest";
 import useFormValidation from "../../../hooks/useFormValidation";
 // components
-import Input from "../../../components/shared/input/Input";
+import Input from "../../../components/shared/Inputs/input/Input";
 import Spinner from "../../../components/shared/spinner/Spinner";
 import Alert from "../../../components/shared/alert/Alert";
 

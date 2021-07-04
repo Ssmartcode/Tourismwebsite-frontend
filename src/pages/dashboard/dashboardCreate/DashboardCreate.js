@@ -6,10 +6,12 @@ import AuthContext from "../../../context/authContext";
 // css
 import "./DashboardCreate.css";
 // components
-import Input from "../../../components/shared/input/Input";
+import Input from "../../../components/shared/Inputs/input/Input";
 import Alert from "../../../components/shared/alert/Alert";
 import Spinner from "../../../components/shared/spinner/Spinner";
 import ImageUpload from "../../../components/shared/image-upload/ImageUpload";
+import Select from "../../../components/shared/Inputs/select/Select";
+import travelCategories from "./travelCategories";
 
 const CreateOffer = () => {
   const [category, setCategory] = useState("");
@@ -26,6 +28,7 @@ const CreateOffer = () => {
 
   const authContext = useContext(AuthContext);
 
+  // FORM - Create new offer
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     if (allInputsValid(validationState.current)) {
@@ -70,18 +73,13 @@ const CreateOffer = () => {
           validationState={validationState}
           initialValue=""
         />
-        <Input
-          id="category"
-          type="text"
-          label="Category"
-          onChange={(category) => setCategory(category)}
-          validators={[isMinLength, isMaxLength]}
-          minLength={3}
-          maxLength={15}
-          errorMessage="Category should have at least 3 characters and maximum 15"
-          validationState={validationState}
-          initialValue=""
-        />
+        <Select
+          id="travel-categories"
+          options={travelCategories}
+          defaultValue="cityBreak"
+          label="offer category"
+          onChange={setCategory}
+        ></Select>
         <Input
           id="price"
           type="number"

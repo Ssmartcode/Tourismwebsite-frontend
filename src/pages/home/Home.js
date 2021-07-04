@@ -9,12 +9,11 @@ const Home = () => {
   const [offers, setOffers] = useState([]);
 
   useEffect(() => {
-    console.log(process.env);
     (async () => {
       try {
         const response = await sendRequest(
           "GET",
-          `${process.env.REACT_APP_BACKEND}/offers`
+          `${process.env.REACT_APP_BACKEND}/offers?sort=desc&count=3`
         );
         setOffers(response.data.offers);
       } catch (err) {

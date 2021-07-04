@@ -9,12 +9,13 @@ import Header from "./components/shared/header/Header";
 import Footer from "./components/shared/footer/Footer";
 // pages
 import Home from "./pages/home/Home";
-import Account from "./pages/account/Account";
+import Authentication from "./pages/authentication/Authentication";
 import Dashboard from "./pages/dashboard/Dashboard";
 import DashboardHome from "./pages/dashboard/dashboardHome/DashboardHome";
 import DashboardCreate from "./pages/dashboard/dashboardCreate/DashboardCreate";
 import DashboardUpdate from "./pages/dashboard/dashboardUpdate/DashboardUpdate";
 import SingleOffer from "./pages/singleOffer/SingleOffer";
+import OffersByCategory from "./pages/OffersByCategory/OffersByCategory";
 
 function App() {
   const [token, setToken] = useState("");
@@ -54,15 +55,17 @@ function App() {
               <Home />
               <Footer />
             </Route>
+            <Route path="/offers/category/:category" exact>
+              <Header />
+              <OffersByCategory />
+            </Route>
             <Route path="/offers/:id" exact>
               <Header />
               <SingleOffer />
-              <Footer />
             </Route>
-            <Route path="/user/account" exact>
+            <Route path="/user/authentication" exact>
               <Header />
-              <Account />
-              <Footer />
+              <Authentication />
             </Route>
             <Route path="/dashboard" exact>
               <Dashboard>
