@@ -1,0 +1,7 @@
+.message-item .delete-message {
+  position: absolute;
+  cursor: pointer;
+  font-size: 1.2rem;
+  top: 5px;
+  right: 15px;
+}

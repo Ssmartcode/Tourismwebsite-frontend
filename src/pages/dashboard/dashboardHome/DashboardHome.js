@@ -1,21 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ListItem from "../../../components/shared/list-item/ListItem";
 import Alert from "../../../components/shared/alert/Alert";
 import useHttpRequest from "../../../hooks/useHttpRequest";
 import "./DashboardHome.css";
 import Spinner from "../../../components/shared/spinner/Spinner";
+import AuthContext from "../../../context/authContext";
 
 const DashboardHome = () => {
   const [offers, setOffers] = useState([]);
   const { sendRequest, isLoading, error } = useHttpRequest();
+  const authContext = useContext(AuthContext);
 
   useEffect(() => {
+    console.log(authContext);
     (async () => {
       const response = await sendRequest(
         "GET",
-        `${process.env.REACT_APP_BACKEND}/offers`
+        `${process.env.REACT_APP_BACKEND}/offers/user-offers/${authContext.userId}`,
+        {},
+        {
+          Authorization: `Bearer ${authContext.token}`,
+        }
       );
-      setOffers(response.data.offers);
+      if (response) setOffers(response.data.offers);
     })();
   }, [sendRequest]);
   return (
@@ -26,7 +33,7 @@ const DashboardHome = () => {
         {offers.map((offer) => {
           return (
             <ListItem
-              key={offer.id}
+              key={offer._id}
               title={offer.title}
               paragraph={offer.category}
               url={`/dashboard/offers/${offer.id}`}
@@ -34,7 +41,7 @@ const DashboardHome = () => {
           );
         })}
       </div>
-      {error && <Alert type="danger" message={error.response.data.messsage} />}
+      {error && <Alert type="danger" message={error} />}
     </div>
   );
 };

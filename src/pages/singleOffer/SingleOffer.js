@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import useHttpRequest from "../../hooks/useHttpRequest";
 import "./SingleOffer.css";
 import AuthContext from "../../context/authContext";
+import SendMessage from "../../components/singleOffer/SendMessage";
+import AddFavorites from "../../components/singleOffer/addFavorites/AddFavorites";
 
 const SingleOffer = () => {
   const [offer, setOffer] = useState({});
@@ -10,6 +12,8 @@ const SingleOffer = () => {
 
   const offerId = useParams().id;
   const authContext = useContext(AuthContext);
+
+  const handleAddToFavorites = () => {};
 
   useEffect(() => {
     (async () => {
@@ -20,29 +24,32 @@ const SingleOffer = () => {
         );
         setOffer(response.data.offer);
       } catch (err) {}
-      console.log("token:" + authContext.token);
     })();
   }, [authContext, offerId, sendRequest]);
   return (
     <section className="single-offer ">
-      <div className="container ">
-        <div className="row">
-          <div className="col-12 col-lg-4 p-0">
-            <h3 className="p-2 text-center mb-0 bg-light">{offer.title}</h3>
-            <img
-              src={`${process.env.REACT_APP_BACKEND}/${offer.image || ""}`}
-              alt=""
-            />
-            <div className="price p-2 bg-light">
+      <div className="container p-0 pb-2">
+        <div className="title d-flex align-items-center justify-content-around">
+          <h3 className="title p-3 text-center mb-0">{offer.title}</h3>
+          <div className="d-flex align-items-center">
+            <div className="price me-4">
               <strong>Price: </strong>
-              {offer.price}$
+              <span>{offer.price}$</span>
             </div>
-          </div>
-          <div className="col-12 col-lg-8 bg-light p-0">
-            <div className="row"></div>
+            <strong className="period me-4">{offer.period}</strong>
+            <AddFavorites offerId={offerId} />
           </div>
         </div>
-        <div className="row"></div>
+        <img
+          src={`${process.env.REACT_APP_BACKEND}/${offer.image || ""}`}
+          className="my-4"
+          alt=""
+        />
+        <SendMessage sendTo={offer.author}>
+          <div className="message-organizer pe-3">
+            <span> Message the organizer</span>
+          </div>
+        </SendMessage>
       </div>
     </section>
   );

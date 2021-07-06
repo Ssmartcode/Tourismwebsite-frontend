@@ -98,11 +98,18 @@ const Header = () => {
               {!authContext.token && (
                 <li className="nav-item">
                   <Link to="/user/authentication" className="nav-link">
+                    Authentication
+                  </Link>
+                </li>
+              )}
+              {authContext.token && !authContext.isAdmin && (
+                <li className="nav-item">
+                  <Link to="/user/account" className="nav-link">
                     Account
                   </Link>
                 </li>
               )}
-              {authContext.token && (
+              {authContext.token && authContext.isAdmin && (
                 <li className="nav-item">
                   <Link to="/dashboard" className="nav-link">
                     Dashboard

@@ -1,6 +1,8 @@
 .input-group {
   margin-bottom: 1rem;
+  min-width: 100%;
 }
+
 input {
   display: inline-block;
   min-width: 100%;

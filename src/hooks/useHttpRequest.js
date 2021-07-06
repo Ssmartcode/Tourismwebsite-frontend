@@ -19,8 +19,8 @@ const useHttpRequest = () => {
         setError(null);
         return response;
       } catch (err) {
-        console.log(err);
-        setError(err.response.data.message);
+        if (!err.response.data.message) setError(err.message);
+        else setError(err.response.data.message);
       }
       setIsLoading(false);
     },

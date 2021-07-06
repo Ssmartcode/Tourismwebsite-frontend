@@ -6,7 +6,7 @@
 .page-link:hover,
 .page-link.active {
   color: #fff !important;
-  background-color: var(--seconday-color);
+  background-color: var(--secondary-color);
 }
 .page-link.disabled {
   cursor: default;

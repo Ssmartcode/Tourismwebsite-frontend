@@ -1,10 +1,54 @@
-.single-offer {
-  margin: 2rem 0;
+.single-offer .title {
+  background: var(--accent-color);
+  color: #333;
+}
+.single-offer .title h3 {
+  font-weight: 600;
+}
+.single-offer .container {
+  margin: 2rem auto;
+  background: #f4f4f4;
+  border-radius: 5px;
 }
 
 .single-offer img {
-  width: 100%;
-  height: 500px;
+  display: block;
+  width: 40%;
+  margin: 0 auto;
+  height: 400px;
   object-fit: cover;
   object-position: center;
+  border-radius: 10px;
+}
+.single-offer .price span {
+  color: #dc3545;
+  font-weight: 600;
+}
+.single-offer .price,
+.single-offer .period,
+.single-offer .add-favorites {
+  font-size: 1.2rem;
+}
+
+.single-offer .add-favorites {
+  cursor: pointer;
+}
+
+.message-organizer {
+  font-size: 1.2rem;
+  width: fit-content;
+  margin-left: auto;
+}
+.message-organizer span {
+  cursor: pointer;
+}
+.message-organizer span:before {
+  font-family: "Font Awesome 5 Free";
+  font-size: 1.3rem;
+  content: "\f2b6";
+}
+.message-organizer:hover span:before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f0e0";
 }

@@ -1,0 +1,6 @@
+.favorites-list,
+.sent-messages {
+  padding: 1rem;
+  background: #f4f4f4;
+  border-radius: 3px;
+}

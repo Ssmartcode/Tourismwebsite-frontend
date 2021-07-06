@@ -16,38 +16,47 @@ import DashboardCreate from "./pages/dashboard/dashboardCreate/DashboardCreate";
 import DashboardUpdate from "./pages/dashboard/dashboardUpdate/DashboardUpdate";
 import SingleOffer from "./pages/singleOffer/SingleOffer";
 import OffersByCategory from "./pages/OffersByCategory/OffersByCategory";
+import DashboardMessages from "./pages/dashboard/dashboardMessages/DashboardMessages";
+import Account from "./pages/account/Account";
 
 function App() {
   const [token, setToken] = useState("");
   const [userId, setUserId] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
 
-  const logIn = useCallback((token, userId, experationDate) => {
+  const logIn = useCallback((token, isAdmin, userId, experationDate) => {
     setToken(token);
+    setIsAdmin(isAdmin);
     setUserId(userId);
     const tokenExperationDate =
       experationDate || new Date(new Date().getTime() + 1000 * 60 * 60);
-    console.log(experationDate);
     localStorage.setItem(
       "userData",
-      JSON.stringify({ token, userId, tokenExperationDate })
+      JSON.stringify({ token, isAdmin, userId, tokenExperationDate })
     );
   }, []);
+
   const logOut = useCallback(() => {
     setToken(null);
     setUserId(null);
+    setIsAdmin(false);
     localStorage.removeItem("userData");
   }, []);
 
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("userData"));
-    if (userData && new Date(userData.tokenExperationDate) > new Date())
-      logIn(userData.token, userData.userId, userData.tokenExperationDate);
+    if (userData)
+      logIn(
+        userData.token,
+        userData.isAdmin,
+        userData.userId,
+        userData.tokenExperationDate
+      );
   }, [logIn]);
+
   return (
     <React.Fragment>
-      <AuthContext.Provider
-        value={{ token, isLoggedIn: !!token, userId, logIn, logOut }}
-      >
+      <AuthContext.Provider value={{ token, isAdmin, userId, logIn, logOut }}>
         <Router>
           <Switch>
             <Route path="/" exact>
@@ -67,22 +76,43 @@ function App() {
               <Header />
               <Authentication />
             </Route>
-            <Route path="/dashboard" exact>
-              <Dashboard>
-                <DashboardHome />
-              </Dashboard>
-            </Route>
-            <Route path="/dashboard/create">
-              <Dashboard>
-                <DashboardCreate />
-              </Dashboard>
-            </Route>
-            <Route path="/dashboard/offers/:id">
-              <Dashboard>
-                <DashboardUpdate />
-              </Dashboard>
-            </Route>
           </Switch>
+
+          {/* Render if user is logged in but not admin */}
+          {token && !isAdmin && (
+            <Switch>
+              <Route path="/user/account" exact>
+                <Header />
+                <Account />
+              </Route>
+            </Switch>
+          )}
+
+          {/* Render if user is logged in and it is an admin */}
+          {token && isAdmin && (
+            <Switch>
+              <Route path="/dashboard" exact>
+                <Dashboard>
+                  <DashboardHome />
+                </Dashboard>
+              </Route>
+              <Route path="/dashboard/create">
+                <Dashboard>
+                  <DashboardCreate />
+                </Dashboard>
+              </Route>
+              <Route path="/dashboard/offers/:id">
+                <Dashboard>
+                  <DashboardUpdate />
+                </Dashboard>
+              </Route>
+              <Route path="/dashboard/messages">
+                <Dashboard>
+                  <DashboardMessages />
+                </Dashboard>
+              </Route>
+            </Switch>
+          )}
         </Router>
       </AuthContext.Provider>
     </React.Fragment>

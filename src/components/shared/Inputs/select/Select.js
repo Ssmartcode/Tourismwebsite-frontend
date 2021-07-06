@@ -3,6 +3,7 @@ import { v4 } from "uuid";
 import "./Select.css";
 
 const Select = (props) => {
+  console.log(props.defaultValue);
   const [selectValue, setSelectValue] = useState(props.defaultValue);
   const { onChange } = props;
 
@@ -22,8 +23,8 @@ const Select = (props) => {
         value={selectValue}
       >
         {props.options.map((option) => (
-          <option key={v4()} value={option.value || option}>
-            {option.text || option}
+          <option key={v4()} value={option.value}>
+            {option.text}
           </option>
         ))}
       </select>

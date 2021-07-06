@@ -4,15 +4,18 @@ import useFormValidation from "../../hooks/useFormValidation";
 import AuthContext from "../../context/authContext";
 // components
 import Input from "../../components/shared/Inputs/input/Input";
+import userRoles from "./userRoles";
 // css
 import "./Authentication.css";
 import useHttpRequest from "../../hooks/useHttpRequest";
 import Alert from "../../components/shared/alert/Alert";
 import Spinner from "../../components/shared/spinner/Spinner";
+import Select from "../../components/shared/Inputs/select/Select";
 
 const Signup = () => {
   const [userName, setUserName] = useState("");
   const [userPassword, setUserPassword] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const [requestResponse, setRequestResponse] = useState("");
 
@@ -34,6 +37,11 @@ const Signup = () => {
   const onFormSumbmit = async (e) => {
     e.preventDefault();
     setRequestResponse(null);
+
+    let formData;
+    if (isSignupMode) formData = { userName, userPassword, isAdmin };
+    else formData = { userName, userPassword };
+
     let response;
     // ! UNCOMMENT THIS LATER
     // if (allInputsValid(validationState.current)) {
@@ -41,21 +49,22 @@ const Signup = () => {
     response = await sendRequest(
       "POST",
       `${process.env.REACT_APP_BACKEND}/users/${route}`,
-      {
-        userName,
-        userPassword,
-      }
+      formData
     );
     // !}
     if (response) {
       isLoginMode &&
-        authContext.logIn(response.data.token, response.data.userId);
+        authContext.logIn(
+          response.data.token,
+          response.data.isAdmin,
+          response.data.userId
+        );
       setRequestResponse(response.data.message);
     }
   };
 
   return (
-    <div className="col-12 col-lg-6 mx-auto p-5">
+    <div className="authentication col-12 col-lg-6 mx-auto p-5">
       <h2 className="text-center">
         Please {isSignupMode ? "sign up:" : "log in:"}
       </h2>
@@ -80,6 +89,18 @@ const Signup = () => {
           errorMessage="Your password should be 8 characters long, have 1 number and 1 uppercase"
           validationState={validationState}
         />
+
+        {/* render only in signup Mode */}
+        {isSignupMode && (
+          <Select
+            id="user-role"
+            options={userRoles}
+            defaultValue={false}
+            label="user role"
+            onChange={setIsAdmin}
+          />
+        )}
+
         {/* log in mode button */}
         {isLoginMode && (
           <button className="btn btn-primary w-100 mb-3">Log In </button>

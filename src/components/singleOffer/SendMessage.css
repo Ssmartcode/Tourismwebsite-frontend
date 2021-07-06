@@ -1,0 +1,18 @@
+.modal {
+  background: #f4f4f4;
+  border-radius: 5px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  height: fit-content;
+  width: 500px;
+  padding: 2rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.modal form {
+  width: 100%;
+}

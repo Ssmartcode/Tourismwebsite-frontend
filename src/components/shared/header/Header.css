@@ -9,7 +9,7 @@ nav a {
   font-weight: 900;
 }
 nav a:hover {
-  background: var(--seconday-color);
+  background: var(--secondary-color);
   color: #f4f4f4 !important;
 }
 .navbar-brand {
@@ -27,7 +27,7 @@ nav a:hover {
 }
 .moving-navigation {
   background: #fff;
-  border: 3px solid var(--seconday-color);
+  border: 3px solid var(--secondary-color);
   border-top: none;
   color: #333;
   position: absolute;
@@ -45,7 +45,7 @@ nav a:hover {
   background: none !important;
 }
 .moving-navigation a:hover {
-  color: var(--seconday-color) !important;
+  color: var(--secondary-color) !important;
 }
 .moving-navigation img {
   width: 60px;
