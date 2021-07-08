@@ -42,6 +42,7 @@ const SendMessage = (props) => {
           title,
           message,
           email,
+          realtedOffer: props.offerId,
           reciever: props.sendTo,
         },
         { Authorization: `Bearer ${authContext.token}` }

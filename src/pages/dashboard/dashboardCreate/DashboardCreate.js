@@ -15,11 +15,16 @@ import travelCategories from "./select-options/travelCategories";
 import countries from "./select-options/countriesList";
 import transport from "./select-options/transportation";
 import globe from "./globe.png";
-import ChoosePeriod from "../../../components/dashboard/dashboard-create/choose-period/ChoosePeriod";
+import ChoosePeriod from "../../../components/dashboard/dashboard-create/choosePeriod/ChoosePeriod";
+import OfferDescription from "../../../components/singleOffer/AddDescription/OfferDescription";
+import AddDescription from "../../../components/dashboard/dashboard-create/addDescription/AddDescription";
+import AddHotel from "../../../components/dashboard/dashboard-create/addHotel/AddHotel";
+import DynamicInputs from "../../../components/shared/Inputs/dynamicInputs/DynamicInputs";
 
 const CreateOffer = () => {
   const [category, setCategory] = useState("");
   const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
   const [country, setCountry] = useState("");
   const [location, setLocation] = useState("");
@@ -48,7 +53,7 @@ const CreateOffer = () => {
       formData.append("begins", begins);
       formData.append("ends", ends);
       formData.append("location", location);
-      formData.append("transportaion", transportation);
+      formData.append("transportation", transportation);
       formData.append("country", country);
       formData.append("image", image);
       formData.append("author", authContext.userId);
@@ -115,7 +120,6 @@ const CreateOffer = () => {
             <Select
               id="countries"
               options={countries}
-              defaultValue="Andorra"
               placeholder="Destination country"
               label="select country"
               onChange={setCountry}
@@ -138,7 +142,6 @@ const CreateOffer = () => {
             <Select
               id="transportation"
               options={transport}
-              defaultValue="No transportation provided"
               label="transportation provided"
               placeholder="Select transportation type if provided"
               onChange={setTransportation}
@@ -148,7 +151,6 @@ const CreateOffer = () => {
             <Select
               id="travel-categories"
               options={travelCategories}
-              defaultValue="cityBreak"
               label="offer category"
               placeholder="Select a category for your offer"
               onChange={setCategory}
@@ -157,8 +159,18 @@ const CreateOffer = () => {
           <div className="col-12">
             <ChoosePeriod onBeginsChange={setBegins} onEndsChange={setEnds} />
           </div>
-
-          <ImageUpload id="image" onImageChange={(image) => setImage(image)} />
+          <div className="col-lg-4">
+            <ImageUpload
+              id="image"
+              onImageChange={(image) => setImage(image)}
+            />
+          </div>
+          <div className="col-lg-4">
+            <AddDescription onSubmitModal={(val) => setDescription(val)} />
+          </div>
+          <div className="col-lg-4">
+            <AddHotel />
+          </div>
           <div className="col-lg-4 mx-auto">
             <button className="btn btn-primary w-100 " type="submit">
               Create an offer
@@ -166,6 +178,7 @@ const CreateOffer = () => {
           </div>
         </div>
       </form>
+      <DynamicInputs />
 
       {/* spinning circle */}
       {isLoading && <Spinner />}

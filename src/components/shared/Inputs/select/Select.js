@@ -3,8 +3,7 @@ import { v4 } from "uuid";
 import "./Select.css";
 
 const Select = (props) => {
-  console.log(props.defaultValue);
-  const [selectValue, setSelectValue] = useState(props.defaultValue);
+  const [selectValue, setSelectValue] = useState(props.placeholder);
   const { onChange } = props;
 
   useEffect(() => {
@@ -23,9 +22,7 @@ const Select = (props) => {
         value={selectValue}
       >
         {/* Placeholder option */}
-        <option disabled selected>
-          {props.placeholder}
-        </option>
+        <option disabled>{props.placeholder}</option>
         {/* options */}
         {props.options.map((option, i) => {
           return (

@@ -1,0 +1,26 @@
+.dynamic-inputs__group {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+}
+.dynamic-inputs__group .delete-input {
+  background-image: url("./remove.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  cursor: pointer;
+}
+.add-input {
+  background-image: url("./plus.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+}
+.dynamic-inputs__group .input-group {
+  margin: 0;
+}
+.dynamic-inputs__group .input-group .input-error {
+  display: none;
+}

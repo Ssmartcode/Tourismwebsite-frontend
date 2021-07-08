@@ -3,16 +3,20 @@
   min-width: 100%;
 }
 
-input {
+input,
+textarea {
   display: inline-block;
   min-width: 100%;
   font-size: 1.2rem;
-  padding: 0.5rem 0.25rem;
+  padding: 0.25rem 0.25rem;
   color: #333;
   border: rgba(50, 50, 50, 0.3);
+  border-radius: 3px !important;
   box-shadow: 7px 7px 5px rgba(50, 50, 50, 0.1);
+  resize: none;
 }
-input.invalid {
+input.invalid,
+textarea.invalid {
   border: 2px solid rgba(236, 77, 77, 0.7);
   outline-color: rgba(236, 77, 77, 0.7);
 }

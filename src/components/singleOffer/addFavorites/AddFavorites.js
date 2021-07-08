@@ -30,7 +30,7 @@ const AddFavorites = (props) => {
       className="add-favorites"
       onAnimationEnd={() => setIsClicked(0)}
       onClick={handleAddToFavorites}
-      isClicked={isClicked}
+      isclicked={isClicked}
     >
       <i className="fas fa-heart text-danger me-1"></i>
       <strong>Favorite</strong>

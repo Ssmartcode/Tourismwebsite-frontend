@@ -1,6 +1,5 @@
 import React from "react";
 import AddFavorites from "../../../components/singleOffer/addFavorites/AddFavorites";
-import formatDate from "../../../utilities/formatDate";
 
 const OfferTitle = (props) => {
   return (
@@ -14,9 +13,6 @@ const OfferTitle = (props) => {
           </span>
           {props.newPrice && <span>{props.newPrice}$</span>}
         </div>
-        <strong className="period me-4">
-          {formatDate(props.begins)} - {formatDate(props.ends)}
-        </strong>
         <AddFavorites offerId={props.offerId} />
       </div>
     </div>

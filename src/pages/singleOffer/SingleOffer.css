@@ -36,7 +36,6 @@
   margin-left: auto;
 }
 .message-organizer span {
-  cursor: pointer;
 }
 .message-organizer span:before {
   font-family: "Font Awesome 5 Free";

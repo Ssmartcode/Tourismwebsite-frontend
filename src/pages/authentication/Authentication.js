@@ -68,10 +68,8 @@ const Signup = () => {
   };
 
   return (
-    <div className="authentication col-12 col-lg-6 mx-auto p-5">
-      <h2 className="text-center">
-        Please {isSignupMode ? "sign up:" : "log in:"}
-      </h2>
+    <div className="authentication col-lg-4 mx-auto p-5">
+      <h2 className="text-center">{isSignupMode ? "Sign up:" : "Log in:"}</h2>
       <form onSubmit={onFormSumbmit}>
         <Input
           id="username"
@@ -116,7 +114,7 @@ const Signup = () => {
       </form>
 
       {/* switch authentication mode */}
-      <p className="text-center mt-2">
+      <p className="text-center mt-2 fs-5">
         I want to
         <span
           className="switch-mode text-primary"

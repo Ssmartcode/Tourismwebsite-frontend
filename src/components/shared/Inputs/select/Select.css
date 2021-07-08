@@ -6,5 +6,6 @@ select {
   padding: 0.5rem 0.25rem;
   color: #333;
   border: rgba(50, 50, 50, 0.3);
+  border-radius: 3px;
   box-shadow: 7px 7px 5px rgba(50, 50, 50, 0.1);
 }

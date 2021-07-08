@@ -1,0 +1,9 @@
+.single-offer img {
+  display: block;
+  width: 80%;
+  margin: 0 auto;
+  height: 400px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
+}
