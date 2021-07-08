@@ -12,15 +12,20 @@ const dashboardMessages = () => {
 
   useEffect(() => {
     (async () => {
-      const response = await sendRequest(
-        "GET",
-        process.env.REACT_APP_BACKEND +
-          "/users/messages/get-messages/" +
-          authContext.userId,
-        {},
-        { Authorization: `Bearer ${authContext.token}` }
-      );
-      setMessages(response.data.messages);
+      let response;
+      try {
+        response = await sendRequest(
+          "GET",
+          process.env.REACT_APP_BACKEND +
+            "/users/messages/get-messages/" +
+            authContext.userId,
+          {},
+          { Authorization: `Bearer ${authContext.token}` }
+        );
+      } catch (err) {
+        return console.log(err);
+      }
+      if (response) setMessages(response.data.messages);
     })();
   }, []);
   return (

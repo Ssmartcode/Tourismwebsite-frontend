@@ -28,12 +28,18 @@ const OffersByCategory = () => {
   // get offers
   useEffect(() => {
     (async () => {
-      const response = await sendRequest(
-        "GET",
-        `${process.env.REACT_APP_BACKEND}/offers/category/${category}?page=${currPage}`
-      );
+      let response;
+      try {
+        response = await sendRequest(
+          "GET",
+          `${process.env.REACT_APP_BACKEND}/offers/category/${category}?page=${currPage}`
+        );
+      } catch (error) {
+        console.log(error);
+      }
       setOffers(response.data.offers);
       setPages(response.data.pages);
+      console.log(response.data.offers);
     })();
   }, [category, currPage]);
 
@@ -50,10 +56,12 @@ const OffersByCategory = () => {
               <Card
                 title={offer.title}
                 category={offer.category}
-                period={offer.period}
+                begings={offer.begins}
+                ends={offer.ends}
                 price={offer.price}
+                newPrice={offer.newPrice}
                 image={offer.image}
-                readMoreLink={`/offers/${offer.id}`}
+                readMoreLink={`/offers/${offer._id}`}
               ></Card>
             </div>
           );

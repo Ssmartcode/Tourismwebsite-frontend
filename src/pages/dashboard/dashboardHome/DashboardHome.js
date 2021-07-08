@@ -36,7 +36,7 @@ const DashboardHome = () => {
               key={offer._id}
               title={offer.title}
               paragraph={offer.category}
-              url={`/dashboard/offers/${offer.id}`}
+              url={`/dashboard/offers/${offer._id}`}
             />
           );
         })}

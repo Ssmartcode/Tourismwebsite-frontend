@@ -11,117 +11,172 @@ import Alert from "../../../components/shared/alert/Alert";
 import Spinner from "../../../components/shared/spinner/Spinner";
 import ImageUpload from "../../../components/shared/image-upload/ImageUpload";
 import Select from "../../../components/shared/Inputs/select/Select";
-import travelCategories from "./travelCategories";
+import travelCategories from "./select-options/travelCategories";
+import countries from "./select-options/countriesList";
+import transport from "./select-options/transportation";
+import globe from "./globe.png";
+import ChoosePeriod from "../../../components/dashboard/dashboard-create/choose-period/ChoosePeriod";
 
 const CreateOffer = () => {
   const [category, setCategory] = useState("");
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState(0);
-  const [period, setPeriod] = useState("");
+  const [country, setCountry] = useState("");
+  const [location, setLocation] = useState("");
+  const [transportation, setTransportation] = useState("");
+  const [begins, setBegins] = useState();
+  const [ends, setEnds] = useState();
   const [image, setImage] = useState(null);
 
   const [requestResponse, setRequestResponse] = useState(null);
 
+  const { sendRequest, error, isLoading } = useHttpRequest();
   const { validators, validationState, allInputsValid } = useFormValidation();
   const { isRequired, isMinLength, isMaxLength } = validators;
-  const { sendRequest, error, isLoading } = useHttpRequest();
 
   const authContext = useContext(AuthContext);
-
   // FORM - Create new offer
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+
     if (allInputsValid(validationState.current)) {
       // if all inputs are valid send all the data to the data base
       const formData = new FormData();
       formData.append("category", category);
       formData.append("title", title);
       formData.append("price", price);
-      formData.append("period", period);
+      formData.append("begins", begins);
+      formData.append("ends", ends);
+      formData.append("location", location);
+      formData.append("transportaion", transportation);
+      formData.append("country", country);
       formData.append("image", image);
       formData.append("author", authContext.userId);
 
-      const response = await sendRequest(
-        "POST",
-        `${process.env.REACT_APP_BACKEND}/offers`,
-        formData,
-        {
-          Authorization: `Bearer ${authContext.token}`,
-        }
-      );
+      let response;
+      try {
+        response = await sendRequest(
+          "POST",
+          `${process.env.REACT_APP_BACKEND}/offers`,
+          formData,
+          {
+            Authorization: `Bearer ${authContext.token}`,
+          }
+        );
+      } catch (err) {
+        return console.log(err);
+      }
 
       // set the response we get from the server
-      setRequestResponse(response);
+      if (response) setRequestResponse(response);
     } else {
       console.log("Not all inputs are valid");
     }
   };
 
   return (
-    <div className="col-10 col-lg-6">
-      <h1>Create an offer</h1>
-      <form onSubmit={handleFormSubmit}>
-        <Input
-          id="title"
-          type="text"
-          label="Title"
-          onChange={(title) => setTitle(title)}
-          validators={[isMinLength, isMaxLength]}
-          minLength={5}
-          maxLength={30}
-          errorMessage="Title should have at least 5 characters and maximum 30"
-          validationState={validationState}
-          initialValue=""
-        />
-        <Select
-          id="travel-categories"
-          options={travelCategories}
-          defaultValue="cityBreak"
-          label="offer category"
-          onChange={setCategory}
-        ></Select>
-        <Input
-          id="price"
-          type="number"
-          label="Price"
-          onChange={(price) => {
-            // transform input from TEXT type to NUMBER type
-            setPrice(+price);
-          }}
-          validators={[isRequired]}
-          errorMessage="Price is required"
-          validationState={validationState}
-          initialValue={0}
-        />
-        <Input
-          id="period"
-          type="text"
-          label="Period"
-          onChange={(period) => {
-            setPeriod(period);
-          }}
-          validators={[isRequired]}
-          errorMessage="Period is required"
-          validationState={validationState}
-          initialValue=""
-        />
-        <ImageUpload id="image" onImageChange={(image) => setImage(image)} />
-        <button className="btn btn-primary w-100" type="submit">
-          Create an offer
-        </button>
+    <div className="row py-5">
+      <div className="d-flex align-items-center justify-content-center mb-5">
+        <img className="new-offer__image me-3" src={globe} alt="" />
+        <h2 className="text-center mb-0">Add a new offer</h2>{" "}
+      </div>
+      <form onSubmit={handleFormSubmit} className="create-offer">
+        <div className="row">
+          <div className="col-lg-6">
+            <Input
+              id="title"
+              type="text"
+              label="Title"
+              onChange={(title) => setTitle(title)}
+              validators={[isMinLength, isMaxLength]}
+              minLength={5}
+              maxLength={30}
+              errorMessage="Title should have at least 5 characters and maximum 30"
+              validationState={validationState}
+              initialValue=""
+            />
+          </div>
+          <div className="col-lg-6">
+            <Input
+              id="price"
+              type="number"
+              label="Price"
+              onChange={(price) => {
+                // transform input from TEXT type to NUMBER type
+                setPrice(+price);
+              }}
+              validators={[isRequired]}
+              errorMessage="Price is required"
+              validationState={validationState}
+              initialValue={0}
+            />
+          </div>
+          <div className="col-lg-6">
+            <Select
+              id="countries"
+              options={countries}
+              defaultValue="Andorra"
+              placeholder="Destination country"
+              label="select country"
+              onChange={setCountry}
+            ></Select>
+          </div>
+          <div className="col-lg-6">
+            <Input
+              id="location"
+              type="text"
+              label="Location"
+              onChange={(location) => {
+                setLocation(location);
+              }}
+              validators={[isRequired]}
+              errorMessage="Location is required"
+              validationState={validationState}
+            />
+          </div>
+          <div className="col-lg-6">
+            <Select
+              id="transportation"
+              options={transport}
+              defaultValue="No transportation provided"
+              label="transportation provided"
+              placeholder="Select transportation type if provided"
+              onChange={setTransportation}
+            ></Select>
+          </div>
+          <div className="col-lg-6">
+            <Select
+              id="travel-categories"
+              options={travelCategories}
+              defaultValue="cityBreak"
+              label="offer category"
+              placeholder="Select a category for your offer"
+              onChange={setCategory}
+            ></Select>
+          </div>
+          <div className="col-12">
+            <ChoosePeriod onBeginsChange={setBegins} onEndsChange={setEnds} />
+          </div>
 
-        {/* spinning circle */}
-        {isLoading && <Spinner />}
-
-        {/* error from server after submiting form */}
-        {/* {error && <Alert message={error.data.message} />} */}
-        {error && <Alert message={error} />}
-
-        {/*If no error recieved from server display success message*/}
-        {requestResponse && (
-          <Alert type="success" message={requestResponse.data.message} />
-        )}
+          <ImageUpload id="image" onImageChange={(image) => setImage(image)} />
+          <div className="col-lg-4 mx-auto">
+            <button className="btn btn-primary w-100 " type="submit">
+              Create an offer
+            </button>
+          </div>
+        </div>
       </form>
+
+      {/* spinning circle */}
+      {isLoading && <Spinner />}
+
+      {/* error from server after submiting form */}
+      {error && <Alert message={error} />}
+
+      {/*If no error recieved from server display success message*/}
+      {requestResponse && !error && (
+        <Alert type="success" message={requestResponse.data.message} />
+      )}
     </div>
   );
 };

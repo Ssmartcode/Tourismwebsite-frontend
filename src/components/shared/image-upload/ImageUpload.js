@@ -26,12 +26,12 @@ const ImageUpload = (props) => {
         accept=".jpg,.png,.jpeg"
         onChange={handleImageUpload}
       />
+      <div className="image-upload-box" onClick={handleImageBoxClick}>
+        Upload image
+      </div>
       <div className="image-preview">
         {previewImage && <img src={previewImage} alt="" />}
         {!previewImage && <p>No image has been uploaded</p>}
-      </div>
-      <div className="image-upload-box" onClick={handleImageBoxClick}>
-        Upload image
       </div>
     </div>
   );

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useHttpRequest from "../../../hooks/useHttpRequest";
 import Message from "../../shared/message/Message";
-import { v4 } from "uuid";
 
 const Messages = ({ authContext }) => {
   const { sendRequest, error, isLoading } = useHttpRequest();
@@ -21,7 +20,7 @@ const Messages = ({ authContext }) => {
           { Authorization: `Bearer ${authContext.token}` }
         );
       } catch (err) {
-        console.log(err);
+        return console.log(err);
       }
       setMessages(response.data.messages);
     })();
@@ -35,7 +34,7 @@ const Messages = ({ authContext }) => {
           {messages.map((message) => {
             return (
               <Message
-                key={v4()}
+                key={message.id}
                 title={message.title}
                 email={message.email}
                 message={message.message}

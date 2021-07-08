@@ -41,3 +41,7 @@ body {
   font-size: 3.5rem;
   font-weight: 900;
 }
+.old-price {
+  text-decoration: line-through;
+  font-weight: 400 !important;
+}

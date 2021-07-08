@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import Modal from "react-modal";
-import useFormValidation from "../../hooks/useFormValidation";
-import useHttpRequest from "../../hooks/useHttpRequest";
-import Input from "../shared/Inputs/input/Input";
+import useFormValidation from "../../../hooks/useFormValidation";
+import useHttpRequest from "../../../hooks/useHttpRequest";
+import Input from "../../shared/Inputs/input/Input";
 import "./SendMessage.css";
-import AuthContext from "../../context/authContext";
-import Alert from "../shared/alert/Alert";
+import AuthContext from "../../../context/authContext";
+import Alert from "../../shared/alert/Alert";
 
 const modal = document.getElementById("modal");
 Modal.setAppElement(modal);
@@ -47,7 +47,7 @@ const SendMessage = (props) => {
         { Authorization: `Bearer ${authContext.token}` }
       );
     } catch (err) {
-      console.log(err);
+      return console.log(err);
     }
     console.log(response.data.message);
   };

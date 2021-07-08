@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useHttpRequest from "../../../hooks/useHttpRequest";
+import Favorite from "../../shared/favorite/Favorite";
+import { v4 } from "uuid";
 
 const Favorites = ({ authContext }) => {
   const [favorites, setFavorites] = useState([]);
@@ -17,7 +19,7 @@ const Favorites = ({ authContext }) => {
           { Authorization: `Bearer ${authContext.token}` }
         );
       } catch (err) {
-        console.log(err);
+        return console.log(err);
       }
       console.log(response.data.favorites);
       setFavorites(response.data.favorites);
@@ -29,23 +31,17 @@ const Favorites = ({ authContext }) => {
       <div className="favorites-list">
         <h6 className="text-center mb-4">Your favorite tourism packages:</h6>
         <ul className="list-group">
-          {favorites.map((fav) => {
-            return (
-              <li className="list-group-item">
-                <h4 className="text-center mb-3">{fav.title}</h4>
-                <div className="d-flex justify-content-around">
-                  <p className="price fs-5">
-                    <strong>Price: </strong>
-                    {fav.price}
-                  </p>
-                  <p className="period fs-5">
-                    <strong>Period: </strong>
-                    {fav.period}
-                  </p>
-                </div>
-              </li>
-            );
-          })}
+          {favorites.map((fav) => (
+            <Favorite
+              key={v4()}
+              title={fav.title}
+              period={fav.period}
+              price={fav.price}
+              id={fav._id}
+              handleFavoriteDeletion={(favorites) => setFavorites(favorites)}
+              favorites={favorites}
+            />
+          ))}
         </ul>
       </div>
     </div>

@@ -1,0 +1,8 @@
+.create-offer {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.new-offer__image {
+  width: 80px;
+  height: 70px;
+}

@@ -46,11 +46,15 @@ const Signup = () => {
     // ! UNCOMMENT THIS LATER
     // if (allInputsValid(validationState.current)) {
     const route = isSignupMode ? "signup" : "login";
-    response = await sendRequest(
-      "POST",
-      `${process.env.REACT_APP_BACKEND}/users/${route}`,
-      formData
-    );
+    try {
+      response = await sendRequest(
+        "POST",
+        `${process.env.REACT_APP_BACKEND}/users/${route}`,
+        formData
+      );
+    } catch (err) {
+      return console.log(err);
+    }
     // !}
     if (response) {
       isLoginMode &&

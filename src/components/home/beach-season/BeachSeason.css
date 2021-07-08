@@ -1,0 +1,24 @@
+#beach-season {
+  background: #333;
+  background-image: linear-gradient(315deg, #333 0%, #555 74%);
+  position: relative;
+}
+#beach-season .section-title {
+  width: fit-content;
+  border-radius: 0 3px 3px 0;
+  background-color: #d9d9d9;
+  background-image: linear-gradient(315deg, #d9d9d9 0%, #f6f2f2 74%);
+  color: #333;
+}
+#beach-season .grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  place-items: center;
+  place-content: center;
+}
+#beach-season img.beach-image {
+  width: 450px;
+}
+#beach-season .offer-card {
+  justify-self: center;
+}

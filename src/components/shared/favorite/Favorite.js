@@ -1,9 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
+import useHttpRequest from "../../../hooks/useHttpRequest";
 import "./Favorite.css";
+import AuthContext from "../../../context/authContext";
 
 const Favorite = (props) => {
+  const { sendRequest, error, isLoading } = useHttpRequest();
+  const authContext = useContext(AuthContext);
+
+  const handleFavoriteDeletion = async () => {
+    let response;
+    try {
+      response = await sendRequest(
+        "DELETE",
+        process.env.REACT_APP_BACKEND + "/users/favorites/delete/" + props.id,
+        {},
+        { Authorization: `Bearer ${authContext.token}` }
+      );
+    } catch (err) {
+      return console.log(err);
+    }
+    //delete favorite on front-end
+    console.log(response.data.favorites);
+    props.handleFavoriteDeletion(response.data.favorites);
+  };
   return (
-    <li className="favorite-item list-group-item p-5 mb-2">
+    <li className="favorite-item list-group-item p-3 mb-2">
       <div className="delete-favorite" onClick={handleFavoriteDeletion}>
         <i className="fas fa-times text-danger"></i>
       </div>

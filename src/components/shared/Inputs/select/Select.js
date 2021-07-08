@@ -22,11 +22,18 @@ const Select = (props) => {
         onChange={handleSelect}
         value={selectValue}
       >
-        {props.options.map((option) => (
-          <option key={v4()} value={option.value}>
-            {option.text}
-          </option>
-        ))}
+        {/* Placeholder option */}
+        <option disabled selected>
+          {props.placeholder}
+        </option>
+        {/* options */}
+        {props.options.map((option, i) => {
+          return (
+            <option key={v4()} value={option.value}>
+              {option.text}
+            </option>
+          );
+        })}
       </select>
     </div>
   );

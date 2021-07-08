@@ -9,22 +9,22 @@ const Message = (props) => {
 
   // delete message from DB
   const handleMessageDeletion = async () => {
-    const response = await sendRequest(
-      "DELETE",
-      process.env.REACT_APP_BACKEND +
-        "/users/messages/delete-message/" +
-        props.id,
-      {},
-      { Authorization: `Bearer ${authContext.token}` }
-    );
+    let response;
+    try {
+      response = await sendRequest(
+        "DELETE",
+        process.env.REACT_APP_BACKEND +
+          "/users/messages/delete-message/" +
+          props.id,
+        {},
+        { Authorization: `Bearer ${authContext.token}` }
+      );
+    } catch (err) {
+      return console.log(err);
+    }
 
     //delete messages on front-end
-    if (!error) {
-      const messages = props.messages.filter(
-        (message) => message.id !== props.id
-      );
-      props.handleMessageDeletion(messages);
-    }
+    props.handleMessageDeletion(response.data.messages);
   };
 
   return (

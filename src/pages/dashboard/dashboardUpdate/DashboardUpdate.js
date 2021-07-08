@@ -14,6 +14,7 @@ const DashboardUpdate = () => {
   const [category, setCategory] = useState("");
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState(0);
+  const [newPrice, setNewPrice] = useState();
   const [period, setPeriod] = useState("");
 
   const [offer, setOffer] = useState({});
@@ -30,11 +31,16 @@ const DashboardUpdate = () => {
 
   useEffect(() => {
     (async () => {
-      const response = await sendRequest(
-        "GET",
-        `${process.env.REACT_APP_BACKEND}/offers/${offerId}`
-      );
-      setOffer(response.data.offer);
+      let response;
+      try {
+        response = await sendRequest(
+          "GET",
+          `${process.env.REACT_APP_BACKEND}/offers/${offerId}`
+        );
+      } catch (err) {
+        return console.log(err);
+      }
+      if (response) setOffer(response.data.offer);
     })();
   }, [sendRequest, offerId, setOffer]);
 
@@ -61,7 +67,7 @@ const DashboardUpdate = () => {
         const response = await sendRequest(
           "PATCH",
           `${process.env.REACT_APP_BACKEND}/offers/${offerId}`,
-          { category, title, price, period },
+          { category, title, price, period, newPrice },
           {
             Authorization: `Bearer ${authContext.token}`,
           }
@@ -113,6 +119,17 @@ const DashboardUpdate = () => {
           initialValue={offer.price}
         />
         <Input
+          id="new-price"
+          type="number"
+          label="New Price"
+          onChange={(newPrice) => {
+            setNewPrice(newPrice);
+          }}
+          validators={[]}
+          errorMessage=""
+          validationState={validationState}
+        />
+        <Input
           id="period"
           type="text"
           label="Period"
@@ -124,6 +141,7 @@ const DashboardUpdate = () => {
           validationState={validationState}
           initialValue={offer.period}
         />
+
         <div className="row">
           <div className="col-12 col-lg-8">
             <button className="btn btn-success w-100">Update</button>
