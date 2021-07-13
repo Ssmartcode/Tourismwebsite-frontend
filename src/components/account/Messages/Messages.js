@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import useHttpRequest from "../../../hooks/useHttpRequest";
 import Message from "../../shared/message/Message";
+import Spinner from "../../shared/spinner/Spinner";
 
 const Messages = ({ authContext }) => {
   const { sendRequest, error, isLoading } = useHttpRequest();
   const [messages, setMessages] = useState([]);
 
-  // get user's messages
   useEffect(() => {
     (async () => {
       let response;
@@ -22,12 +22,13 @@ const Messages = ({ authContext }) => {
       } catch (err) {
         return console.log(err);
       }
-      setMessages(response.data.messages);
+      if (!error && response) setMessages(response.data.messages);
     })();
   }, []);
 
   return (
     <div className="col-lg-6">
+      {isLoading && <Spinner />}
       <div className="sent-messages">
         <h5 className="text-center mb-4">Messages you have sent:</h5>
         <ul className="list-group">

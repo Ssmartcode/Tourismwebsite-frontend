@@ -1,12 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
-import { v4 } from "uuid";
-import useFormValidation from "../../../../hooks/useFormValidation";
-import Input from "../input/Input";
+import React, { useEffect, useState } from "react";
 import "./DynamicInputs.css";
 
-const DynamicInputs = () => {
+const DynamicInputs = (props) => {
   const [inputsList, setInputsList] = useState([{ value: "" }]);
 
+  useEffect(() => {
+    props.onChange(inputsList);
+  }, [inputsList]);
   const addNewInput = () => {
     const newList = [...inputsList];
     newList.push({ value: "" });
@@ -24,22 +24,30 @@ const DynamicInputs = () => {
   };
 
   return (
-    <div className="d-flex">
+    <div className="">
       {inputsList.map((input, i) => {
         return (
-          <div className="dynamic-inputs__group">
+          <div key={i} className="dynamic-inputs__group">
             <input
-              key={i}
+              className="mb-2"
               id={i}
               type="text"
               onChange={(e) => handleInputChange(e, i)}
               value={input.value}
+              placeholder={props.placeholder + "#" + (i + 1)}
             />
-            <i className="delete-input" onClick={(e) => deleteInput(e, i)}></i>
+            {i !== 0 && (
+              <i
+                className="delete-input mb-2"
+                onClick={(e) => deleteInput(e, i)}
+              ></i>
+            )}
+            {i === inputsList.length - 1 && i < props.maxInputs - 1 && (
+              <i className={`add-input mb-2`} onClick={addNewInput}></i>
+            )}
           </div>
         );
       })}
-      <i className="add-input" onClick={addNewInput}></i>
     </div>
   );
 };

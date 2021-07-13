@@ -1,7 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import moment from "moment";
+
+const today = moment(Date.now()).format("YYYY-MM-DD");
+const tomorrow = moment(Date.now() + 86400000).format("YYYY-MM-DD");
 const ChoosePeriod = (props) => {
-  const [offerBegins, setOfferBegins] = useState();
-  const [offerEnds, setOfferEnds] = useState();
+  const [offerBegins, setOfferBegins] = useState(today);
+  const [offerEnds, setOfferEnds] = useState(tomorrow);
 
   const handleOfferBegins = (e) => {
     const date = e.target.value;
@@ -28,6 +32,7 @@ const ChoosePeriod = (props) => {
           onChange={handleOfferBegins}
           placeholder="The journey begins:"
           value={offerBegins}
+          min={today}
         />
       </div>
       <div className="col-lg-4 ">
@@ -36,6 +41,9 @@ const ChoosePeriod = (props) => {
           id="offer-ends"
           onChange={handleOfferEnds}
           value={offerEnds}
+          min={moment(new Date(offerBegins).getTime() + 86400000).format(
+            "YYYY-MM-DD"
+          )}
         />
       </div>
     </div>

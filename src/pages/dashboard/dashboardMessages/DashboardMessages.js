@@ -4,6 +4,7 @@ import AuthContext from "../../../context/authContext";
 import "./DashboardMessages.css";
 import Message from "../../../components/shared/message/Message";
 import Alert from "../../../components/shared/alert/Alert";
+import Spinner from "../../../components/shared/spinner/Spinner";
 
 const dashboardMessages = () => {
   const { sendRequest, error, isLoading } = useHttpRequest();
@@ -25,7 +26,7 @@ const dashboardMessages = () => {
       } catch (err) {
         return console.log(err);
       }
-      if (response) setMessages(response.data.messages);
+      if (!error && response) setMessages(response.data.messages);
     })();
   }, []);
   return (
@@ -37,6 +38,7 @@ const dashboardMessages = () => {
         />
       )}
       <ul className="list-group">
+        {isLoading && <Spinner />}
         {messages.map((message) => {
           return (
             <Message

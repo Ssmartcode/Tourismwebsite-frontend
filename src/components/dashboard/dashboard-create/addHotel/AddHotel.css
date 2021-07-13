@@ -1,0 +1,7 @@
+.add-hotel .rating img {
+  width: 45px;
+}
+.add-hotel .image-preview img {
+  max-width: 400px;
+  max-height: 200px;
+}

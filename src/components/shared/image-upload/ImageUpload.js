@@ -27,7 +27,7 @@ const ImageUpload = (props) => {
         onChange={handleImageUpload}
       />
       <div className="image-upload-box w-100" onClick={handleImageBoxClick}>
-        Upload image
+        {props.placeholder || "Upload image"}
       </div>
       <div className="image-preview">
         {previewImage && <img src={previewImage} alt="" />}

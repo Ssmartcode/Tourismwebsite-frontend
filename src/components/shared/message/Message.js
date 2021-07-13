@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import useHttpRequest from "../../../hooks/useHttpRequest";
 import "./Message.css";
 import AuthContext from "../../../context/authContext";
+import Spinner from "../spinner/Spinner";
 
 const Message = (props) => {
   const authContext = useContext(AuthContext);
@@ -24,11 +25,12 @@ const Message = (props) => {
     }
 
     //delete messages on front-end
-    props.handleMessageDeletion(response.data.messages);
+    if (!error && response) props.handleMessageDeletion(response.data.messages);
   };
 
   return (
     <li className="message-item list-group-item p-5 mb-2">
+      {isLoading && <Spinner />}
       <div className="delete-message" onClick={handleMessageDeletion}>
         <i className="fas fa-times text-danger"></i>
       </div>

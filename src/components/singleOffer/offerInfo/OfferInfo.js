@@ -14,7 +14,15 @@ const OfferInfo = (props) => {
       </p>
       <p>
         <strong>Transportation</strong>: {props.transportation}{" "}
-        {props.transportation === "Plane" ? <i>&#x1F6EB;</i> : <i>&#x1F68D;</i>}
+        {props.transportation === "Plane" ? (
+          <span role="img" aria-label="emoji describing transportation type">
+            &#x1F6EB;
+          </span>
+        ) : (
+          <span role="img" aria-label="emoji describing transportation type">
+            &#x1F68D;
+          </span>
+        )}
       </p>
       <p className="period">
         <strong>Period: </strong>

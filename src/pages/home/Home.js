@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 // components
 import Showcase from "../../components/home/showcase/Showcase";
 import Featured from "../../components/home/featured/Featured";

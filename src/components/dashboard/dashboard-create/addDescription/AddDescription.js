@@ -14,14 +14,17 @@ const AddDescription = (props) => {
   const { isMinLength, isMaxLength } = validators;
 
   const handleCloseModal = () => {
-    props.onSubmitModal(description);
-    setModalIsOpen(false);
+    if (allInputsValid(validationState.current)) {
+      props.onSubmitModal(description);
+      setModalIsOpen(false);
+    }
   };
 
   return (
     <React.Fragment>
       <button
-        className="btn btn-secondary w-100"
+        type="button"
+        className="btn btn-secondary w-100 py-2 "
         onClick={() => setModalIsOpen(true)}
       >
         Add Description
@@ -45,9 +48,15 @@ const AddDescription = (props) => {
           errorMessage="Description is too short!"
           validationState={validationState}
         />
-        <button className="btn btn-secondary" onClick={handleCloseModal}>
-          Add
-        </button>
+        <div className="col-lg-6 mx-auto">
+          <button
+            type="button"
+            className="btn btn-secondary w-100"
+            onClick={handleCloseModal}
+          >
+            Add
+          </button>
+        </div>
       </Modal>
     </React.Fragment>
   );

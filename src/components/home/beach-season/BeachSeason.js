@@ -3,6 +3,7 @@ import "./BeachSeason.css";
 import beachImage from "./beach.svg";
 import Card from "../../shared/card/Card";
 import useHttpRequest from "../../../hooks/useHttpRequest";
+import Spinner from "../../shared/spinner/Spinner";
 
 const BeachSeason = () => {
   const [offer, setOffer] = useState();
@@ -18,12 +19,13 @@ const BeachSeason = () => {
       } catch (error) {
         return console.log(error);
       }
-      if (response) setOffer(response.data.offer);
+      if (!error && response) setOffer(response.data.offer);
     })();
   }, []);
 
   return (
     <React.Fragment>
+      {isLoading && <Spinner />}
       <div className="section-title px-4 py-2 mb-5">
         <h3 className="mb-0 fw-bold">Most wanted beach season offer:</h3>
       </div>

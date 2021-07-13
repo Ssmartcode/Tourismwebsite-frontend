@@ -4,7 +4,7 @@ import AuthContext from "../../../context/authContext";
 import "./AddFavorites.css";
 
 const AddFavorites = (props) => {
-  const { sendRequest, error, isLoading } = useHttpRequest();
+  const { sendRequest } = useHttpRequest();
   const [isClicked, setIsClicked] = useState(0);
 
   const authContext = useContext(AuthContext);
@@ -12,7 +12,7 @@ const AddFavorites = (props) => {
   const handleAddToFavorites = async () => {
     setIsClicked(1);
     try {
-      const response = await sendRequest(
+      await sendRequest(
         "POST",
         "http://localhost:5000/users/favorites/add",
         { offerId: props.offerId },

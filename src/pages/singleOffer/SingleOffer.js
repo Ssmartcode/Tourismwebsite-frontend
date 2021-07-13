@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, useCallback } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import useHttpRequest from "../../hooks/useHttpRequest";
 import AuthContext from "../../context/authContext";
@@ -6,7 +6,7 @@ import SendMessage from "../../components/singleOffer/sendMessage/SendMessage";
 import OfferTitle from "../../components/singleOffer/offerTitle/OfferTitle";
 import OfferImages from "../../components/singleOffer/offerImages/OfferImages";
 import OfferInfo from "../../components/singleOffer/offerInfo/OfferInfo";
-import AddDescription from "../../components/singleOffer/AddDescription/OfferDescription";
+import OfferDescription from "../../components/singleOffer/OfferDescription/OfferDescription";
 import "./SingleOffer.css";
 const SingleOffer = () => {
   const [offer, setOffer] = useState({});
@@ -27,10 +27,11 @@ const SingleOffer = () => {
         return console.log(err);
       }
       if (response) setOffer(response.data.offer);
+      console.log(response.data.offer.hotelId);
     })();
   }, [authContext, offerId, sendRequest]);
   return (
-    <section className="single-offer ">
+    <section className="single-offer">
       <div className="container p-0 pb-2">
         <OfferTitle
           title={offer.title}
@@ -38,7 +39,7 @@ const SingleOffer = () => {
           newPrice={offer.newPrice}
           offerId={offerId}
         />
-        <div className="row">
+        <div className="row g-0 px-3">
           <div className="col-lg-6">
             <OfferImages image={offer.image} />
           </div>
@@ -51,7 +52,10 @@ const SingleOffer = () => {
               country={offer.country}
               transportation={offer.transportation}
             />
-            <AddDescription />
+            <OfferDescription description={offer.description} />
+          </div>
+          <div className="col-lg-6">
+            {offer.hotelId && <OfferImages image={offer.hotelId.image} />}
           </div>
         </div>
         <SendMessage sendTo={offer.author} offerId={offer._id}>

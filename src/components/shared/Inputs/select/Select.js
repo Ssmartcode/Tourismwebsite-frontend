@@ -4,6 +4,7 @@ import "./Select.css";
 
 const Select = (props) => {
   const [selectValue, setSelectValue] = useState(props.placeholder);
+  const [isTouched, setIsTouched] = useState(false);
   const { onChange } = props;
 
   useEffect(() => {
@@ -20,6 +21,7 @@ const Select = (props) => {
         className={`${props.className || ""}`}
         onChange={handleSelect}
         value={selectValue}
+        onBlur={() => setIsTouched(true)}
       >
         {/* Placeholder option */}
         <option disabled>{props.placeholder}</option>
@@ -32,6 +34,11 @@ const Select = (props) => {
           );
         })}
       </select>
+      <div className="input-error">
+        {isTouched &&
+          selectValue === props.placeholder &&
+          "Please select a value"}
+      </div>
     </div>
   );
 };

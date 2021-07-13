@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import Modal from "react-modal";
 import useFormValidation from "../../../hooks/useFormValidation";
 import useHttpRequest from "../../../hooks/useHttpRequest";
@@ -6,6 +6,7 @@ import Input from "../../shared/Inputs/input/Input";
 import "./SendMessage.css";
 import AuthContext from "../../../context/authContext";
 import Alert from "../../shared/alert/Alert";
+import Spinner from "../../shared/spinner/Spinner";
 
 const modal = document.getElementById("modal");
 Modal.setAppElement(modal);
@@ -18,7 +19,7 @@ const SendMessage = (props) => {
 
   const authContext = useContext(AuthContext);
 
-  const { validators, validationState, allInputsValid } = useFormValidation();
+  const { validators, validationState } = useFormValidation();
   const { isMinLength, isMaxLength } = validators;
 
   const { sendRequest, error, isLoading } = useHttpRequest();
@@ -114,7 +115,8 @@ const SendMessage = (props) => {
             <button className="btn btn-primary ">Send message</button>
           </form>
         )}
-
+        {/* Loading spinner */}
+        {isLoading && <Spinner />}
         {/* display error if any */}
         {error && <Alert type="danger" message={error}></Alert>}
       </Modal>

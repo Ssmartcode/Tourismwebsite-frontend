@@ -4,7 +4,7 @@ import "./Favorite.css";
 import AuthContext from "../../../context/authContext";
 
 const Favorite = (props) => {
-  const { sendRequest, error, isLoading } = useHttpRequest();
+  const { sendRequest, error } = useHttpRequest();
   const authContext = useContext(AuthContext);
 
   const handleFavoriteDeletion = async () => {
@@ -20,8 +20,8 @@ const Favorite = (props) => {
       return console.log(err);
     }
     //delete favorite on front-end
-    console.log(response.data.favorites);
-    props.handleFavoriteDeletion(response.data.favorites);
+    if (!error && response)
+      props.handleFavoriteDeletion(response.data.favorites);
   };
   return (
     <li className="favorite-item list-group-item p-3 mb-2">

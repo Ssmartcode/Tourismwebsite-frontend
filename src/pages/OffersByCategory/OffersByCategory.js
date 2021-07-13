@@ -37,9 +37,10 @@ const OffersByCategory = () => {
       } catch (error) {
         console.log(error);
       }
-      setOffers(response.data.offers);
-      setPages(response.data.pages);
-      console.log(response.data.offers);
+      if (!error && response) {
+        setOffers(response.data.offers);
+        setPages(response.data.pages);
+      }
     })();
   }, [category, currPage]);
 

@@ -23,7 +23,7 @@ const Signup = () => {
   const [isLoginMode, setIsLoginMode] = useState(false);
 
   const { isLoading, error, sendRequest } = useHttpRequest();
-  const { validators, validationState, allInputsValid } = useFormValidation();
+  const { validators, validationState } = useFormValidation();
   const { isMinLength, isMaxLength, isPassword } = validators;
 
   const authContext = useContext(AuthContext);

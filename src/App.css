@@ -44,3 +44,20 @@ body {
   text-decoration: line-through;
   font-weight: 400 !important;
 }
+.btn {
+  padding: 0.5rem 0.75rem;
+}
+.btn.btn-secondary {
+  background: var(--secondary-color);
+  border: #3b6eb1;
+  color: #333;
+}
+.btn.btn-primary {
+  background: var(--primary-color);
+  border: #120f70;
+}
+.btn.btn-accent {
+  background: var(--accent-color);
+  border: #a18513;
+  color: #333;
+}

@@ -6,3 +6,8 @@
   width: 80px;
   height: 70px;
 }
+.disabled {
+  pointer-events: none;
+  background: #333 !important;
+  color: #fff !important;
+}
