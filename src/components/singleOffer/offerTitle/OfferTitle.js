@@ -1,6 +1,6 @@
 import React from "react";
 import AddFavorites from "../../../components/singleOffer/addFavorites/AddFavorites";
-
+import "./OfferTitle.css";
 const OfferTitle = (props) => {
   return (
     <div className="title d-flex align-items-center justify-content-around">

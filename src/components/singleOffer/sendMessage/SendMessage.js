@@ -43,7 +43,7 @@ const SendMessage = (props) => {
           title,
           message,
           email,
-          realtedOffer: props.offerId,
+          related: props.offerId,
           reciever: props.sendTo,
         },
         { Authorization: `Bearer ${authContext.token}` }
@@ -51,7 +51,7 @@ const SendMessage = (props) => {
     } catch (err) {
       return console.log(err);
     }
-    console.log(response.data.message);
+    if (!error && response) handleModalClose();
   };
 
   return (

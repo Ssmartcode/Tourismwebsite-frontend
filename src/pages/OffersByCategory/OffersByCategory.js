@@ -5,6 +5,8 @@ import useHttpRequest from "../../hooks/useHttpRequest";
 import Spinner from "../../components/shared/spinner/Spinner";
 import Card from "../../components/shared/card/Card";
 import Pagination from "../../components/shared/pagination/Pagination";
+import Sorting from "../../components/offerByCategory/sorting/Sorting";
+import Filters from "../../components/offerByCategory/filters/Filters";
 
 const OffersByCategory = () => {
   const { isLoading, sendRequest, error } = useHttpRequest();
@@ -19,6 +21,8 @@ const OffersByCategory = () => {
   const onPageChange = useCallback((currPage) => {
     setCurrpage(currPage);
   });
+  const [sorting, setSorting] = useState("");
+  const [filtersList, setFiltersList] = useState([]);
 
   // set category
   useEffect(() => {
@@ -27,12 +31,17 @@ const OffersByCategory = () => {
 
   // get offers
   useEffect(() => {
+    const filters =
+      filtersList.length > 0
+        ? filtersList.map((f) => "&" + f + "=yes").join("")
+        : "";
+
     (async () => {
       let response;
       try {
         response = await sendRequest(
           "GET",
-          `${process.env.REACT_APP_BACKEND}/offers/category/${category}?page=${currPage}`
+          `${process.env.REACT_APP_BACKEND}/offers/category/${category}?page=${currPage}&${sorting}=yes${filters}`
         );
       } catch (error) {
         console.log(error);
@@ -42,13 +51,22 @@ const OffersByCategory = () => {
         setPages(response.data.pages);
       }
     })();
-  }, [category, currPage]);
+  }, [category, currPage, sorting, filtersList]);
 
   return (
     <div className="container">
       <h3 className="my-5">
-        Offers by category ({category.split("-").join(" ").toUpperCase()}):
+        Offers by category (
+        {category
+          .split("-")
+          .join(" ")
+          .toUpperCase()}
+        ):
       </h3>
+      <div className="d-flex">
+        <Sorting onChange={(val) => setSorting(val)} />
+        <Filters onChange={(val) => setFiltersList(val)} />
+      </div>
       <div className="row mb-3 justify-content-between">
         {isLoading && <Spinner />}
         {offers.map((offer) => {

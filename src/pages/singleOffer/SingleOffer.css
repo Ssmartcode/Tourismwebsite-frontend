@@ -1,46 +1,30 @@
-.single-offer .title {
-  background: var(--accent-color);
-  color: #333;
-}
-.single-offer .title h3 {
-  font-weight: 600;
-}
 .single-offer .container {
   margin: 2rem auto;
   background: #f4f4f4;
   border-radius: 5px;
 }
 
-.single-offer img {
-  display: block;
-  width: 80%;
-  margin: 0 auto;
-  height: 400px;
-  object-fit: cover;
-  object-position: center;
-  border-radius: 10px;
-}
 .single-offer .price span {
   color: #dc3545;
   font-weight: 600;
 }
 .single-offer .price,
-.single-offer .period,
 .single-offer .add-favorites {
   font-size: 1.2rem;
 }
 
 .message-organizer {
+  cursor: pointer;
   font-size: 1.2rem;
-  width: fit-content;
   margin-left: auto;
+  width: fit-content;
 }
-.message-organizer span {
-}
+
 .message-organizer span:before {
   font-family: "Font Awesome 5 Free";
   font-size: 1.3rem;
   content: "\f2b6";
+  transition: 0.4s;
 }
 .message-organizer:hover span:before {
   font-family: "Font Awesome 5 Free";

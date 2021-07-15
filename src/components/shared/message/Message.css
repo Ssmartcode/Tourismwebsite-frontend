@@ -5,3 +5,8 @@
   top: 5px;
   right: 15px;
 }
+p.small {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #555;
+}

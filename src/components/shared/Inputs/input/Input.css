@@ -2,9 +2,8 @@
   margin-bottom: 1rem;
   min-width: 100%;
 }
-
-input,
-textarea {
+.input-group input,
+.input-group textarea {
   display: inline-block;
   min-width: 100%;
   font-size: 1.2rem;

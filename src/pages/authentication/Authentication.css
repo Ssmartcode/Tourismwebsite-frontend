@@ -1,6 +1,9 @@
 .authentication form {
   margin-top: 2rem;
 }
+.authentication img.auth-icon {
+  width: 35px;
+}
 .switch-mode:hover {
   cursor: pointer;
 }

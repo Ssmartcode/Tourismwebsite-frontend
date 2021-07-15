@@ -3,6 +3,7 @@ import useHttpRequest from "../../../hooks/useHttpRequest";
 import "./Message.css";
 import AuthContext from "../../../context/authContext";
 import Spinner from "../spinner/Spinner";
+import { Link } from "react-router-dom";
 
 const Message = (props) => {
   const authContext = useContext(AuthContext);
@@ -34,11 +35,19 @@ const Message = (props) => {
       <div className="delete-message" onClick={handleMessageDeletion}>
         <i className="fas fa-times text-danger"></i>
       </div>
-      <h5 className="text-center">Title: {props.title}</h5>
+      <h5 className="text-center">
+        <strong>Title</strong>: {props.title}
+      </h5>
       <p className="mt-3">{props.message}</p>
-      <p className="mt-3 mb-0">
+      <p className="my-3">
         <strong>Contact information: </strong>
         {props.email}
+      </p>
+      <p className="small my-0">
+        Message was sent related to:{" "}
+        <Link className="text-primary" to={`/offers/${props.related}`}>
+          this offer
+        </Link>
       </p>
     </li>
   );

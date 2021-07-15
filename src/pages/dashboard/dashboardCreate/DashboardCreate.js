@@ -176,7 +176,7 @@ const CreateOffer = () => {
                 onChange={setCategory}
               ></Select>
             </div>
-            <div className="col-12">
+            <div className="col-12 my-3">
               <ChoosePeriod onBeginsChange={setBegins} onEndsChange={setEnds} />
             </div>
             <div className="col-lg-4">

@@ -10,6 +10,4 @@
 }
 .page-link.disabled {
   cursor: default;
-  background-color: #ccc;
-  color: #333 !important;
 }

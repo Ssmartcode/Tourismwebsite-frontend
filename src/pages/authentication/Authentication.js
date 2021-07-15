@@ -1,16 +1,16 @@
 import React, { useState, useContext } from "react";
 import useFormValidation from "../../hooks/useFormValidation";
+import useHttpRequest from "../../hooks/useHttpRequest";
 // context
 import AuthContext from "../../context/authContext";
 // components
 import Input from "../../components/shared/Inputs/input/Input";
 import userRoles from "./userRoles";
-// css
-import "./Authentication.css";
-import useHttpRequest from "../../hooks/useHttpRequest";
 import Alert from "../../components/shared/alert/Alert";
 import Spinner from "../../components/shared/spinner/Spinner";
 import Select from "../../components/shared/Inputs/select/Select";
+// css
+import "./Authentication.css";
 
 const Signup = () => {
   const [userName, setUserName] = useState("");
@@ -98,8 +98,9 @@ const Signup = () => {
             id="user-role"
             options={userRoles}
             defaultValue={false}
-            label="user role"
+            placeholder="Choose a user role:"
             onChange={setIsAdmin}
+            className="mb-3"
           />
         )}
 

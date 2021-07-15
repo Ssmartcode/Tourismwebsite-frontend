@@ -39,6 +39,7 @@ const Messages = ({ authContext }) => {
                 title={message.title}
                 email={message.email}
                 message={message.message}
+                related={message.related}
                 id={message.id}
                 messages={messages}
                 handleMessageDeletion={(messages) => setMessages(messages)}

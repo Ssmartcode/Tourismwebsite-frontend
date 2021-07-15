@@ -8,6 +8,7 @@ import OfferImages from "../../components/singleOffer/offerImages/OfferImages";
 import OfferInfo from "../../components/singleOffer/offerInfo/OfferInfo";
 import OfferDescription from "../../components/singleOffer/OfferDescription/OfferDescription";
 import "./SingleOffer.css";
+import OfferHotel from "../../components/singleOffer/offerHotel/OfferHotel";
 const SingleOffer = () => {
   const [offer, setOffer] = useState({});
   const { sendRequest } = useHttpRequest();
@@ -27,7 +28,6 @@ const SingleOffer = () => {
         return console.log(err);
       }
       if (response) setOffer(response.data.offer);
-      console.log(response.data.offer.hotelId);
     })();
   }, [authContext, offerId, sendRequest]);
   return (
@@ -40,9 +40,11 @@ const SingleOffer = () => {
           offerId={offerId}
         />
         <div className="row g-0 px-3">
+          {/* offer image */}
           <div className="col-lg-6">
-            <OfferImages image={offer.image} />
+            <OfferImages image={offer.image} imageDescription="Offer image" />
           </div>
+          {/* Informations about the offer */}
           <div className="col-lg-6">
             <OfferInfo
               title={offer.title}
@@ -52,12 +54,33 @@ const SingleOffer = () => {
               country={offer.country}
               transportation={offer.transportation}
             />
+            {/* offer description */}
             <OfferDescription description={offer.description} />
           </div>
-          <div className="col-lg-6">
-            {offer.hotelId && <OfferImages image={offer.hotelId.image} />}
-          </div>
+          {offer.hotelId && (
+            <React.Fragment>
+              {/* hotel image */}
+              <div className="col-lg-6">
+                <OfferImages
+                  image={offer.hotelId.image}
+                  imageDescription="Hotel images"
+                />
+                )
+              </div>
+              {/* Hotel informations */}
+              <div className="col-lg-6">
+                <OfferHotel
+                  hotelName={offer.hotelId.hotelName}
+                  address={offer.hotelId.address}
+                  description={offer.hotelId.description}
+                  stars={offer.hotelId.stars}
+                  facilities={offer.hotelId.facilities}
+                />
+              </div>
+            </React.Fragment>
+          )}
         </div>
+        {/* send message to organizer */}
         <SendMessage sendTo={offer.author} offerId={offer._id}>
           <div className="message-organizer pe-3">
             <span> Message the organizer</span>

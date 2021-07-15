@@ -9,19 +9,30 @@ import useFormValidation from "../../../hooks/useFormValidation";
 import Input from "../../../components/shared/Inputs/input/Input";
 import Spinner from "../../../components/shared/spinner/Spinner";
 import Alert from "../../../components/shared/alert/Alert";
+import ChoosePeriod from "../../../components/dashboard/dashboard-create/choosePeriod/ChoosePeriod";
+import travelCategories from "./select-options/travelCategories";
+import countries from "./select-options/countriesList";
+import transport from "./select-options/transportation";
+import Select from "../../../components/shared/Inputs/select/Select";
 
 const DashboardUpdate = () => {
   const [category, setCategory] = useState("");
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState(0);
   const [newPrice, setNewPrice] = useState();
-  const [period, setPeriod] = useState("");
+  const [description, setDescription] = useState("");
+  const [country, setCountry] = useState("");
+  const [location, setLocation] = useState("");
+  const [transportation, setTransportation] = useState("");
+  const [begins, setBegins] = useState();
+  const [ends, setEnds] = useState();
+  //! const [image, setImage] = useState();
 
-  const [offer, setOffer] = useState({});
+  const [offer, setOffer] = useState();
   const [requestResponse, setRequestResponse] = useState(null);
 
   const { isLoading, error, sendRequest } = useHttpRequest();
-  const { validators, validationState, allInputsValid } = useFormValidation();
+  const { validators, validationState } = useFormValidation();
   const { isRequired, isMinLength, isMaxLength } = validators;
 
   const authContext = useContext(AuthContext);
@@ -62,89 +73,165 @@ const DashboardUpdate = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    if (allInputsValid) {
-      try {
-        const response = await sendRequest(
-          "PATCH",
-          `${process.env.REACT_APP_BACKEND}/offers/${offerId}`,
-          { category, title, price, period, newPrice },
-          {
-            Authorization: `Bearer ${authContext.token}`,
-          }
-        );
-        setRequestResponse(response);
-      } catch (err) {}
+
+    const formData = new FormData();
+    formData.append("category", category);
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("price", price);
+    formData.append("begins", begins);
+    formData.append("ends", ends);
+    formData.append("location", location);
+    formData.append("transportation", transportation);
+    formData.append("country", country);
+    //! formData.append("image", image);
+
+    // if (allInputsValid(validationState.current)) {
+    try {
+      const response = await sendRequest(
+        "PATCH",
+        `${process.env.REACT_APP_BACKEND}/offers/${offerId}`,
+        {
+          category,
+          description,
+          title,
+          price,
+          newPrice,
+          begins,
+          ends,
+          location,
+          transportation,
+          country,
+        },
+        {
+          Authorization: `Bearer ${authContext.token}`,
+        }
+      );
+      setRequestResponse(response);
+    } catch (err) {
+      return console.log(err);
     }
+    // }
   };
+
+  // return spinner if offer hasn't yet been fetched from server
+  if (!offer) return <Spinner />;
 
   return (
     <div className="col-10 col-lg-6">
-      <h1>Modify the current offer</h1>
+      <h2 className="text-center mb-5">
+        <span>{title}</span>
+      </h2>
       <form onSubmit={handleFormSubmit}>
-        <Input
-          id="title"
-          type="text"
-          label="Title"
-          onChange={(title) => setTitle(title)}
-          validators={[isMinLength, isMaxLength]}
-          minLength={5}
-          maxLength={30}
-          errorMessage="Title should have at least 5 characters and maximum 30"
-          validationState={validationState}
-          initialValue={offer.title}
-        />
-        <Input
-          id="category"
-          type="text"
-          label="Category"
-          onChange={(category) => setCategory(category)}
-          validators={[isMinLength, isMaxLength]}
-          minLength={3}
-          maxLength={15}
-          errorMessage="Category should have at least 3 characters and maximum 15"
-          validationState={validationState}
-          initialValue={offer.category}
-        />
-        <Input
-          id="price"
-          type="number"
-          label="Price"
-          onChange={(price) => {
-            // transform input from TEXT type to NUMBER type
-            setPrice(+price);
-          }}
-          validators={[isRequired]}
-          errorMessage="Price is required"
-          validationState={validationState}
-          initialValue={offer.price}
-        />
-        <Input
-          id="new-price"
-          type="number"
-          label="New Price"
-          onChange={(newPrice) => {
-            setNewPrice(newPrice);
-          }}
-          validators={[]}
-          errorMessage=""
-          validationState={validationState}
-        />
-        <Input
-          id="period"
-          type="text"
-          label="Period"
-          onChange={(period) => {
-            setPeriod(period);
-          }}
-          validators={[isRequired]}
-          errorMessage="Period is required"
-          validationState={validationState}
-          initialValue={offer.period}
-        />
+        <div className="row">
+          <div className="col-lg-6">
+            <Input
+              id="title"
+              type="text"
+              label="Title"
+              onChange={(title) => setTitle(title)}
+              validators={[isMinLength, isMaxLength]}
+              minLength={5}
+              maxLength={30}
+              errorMessage="Title should have at least 5 characters and maximum 30"
+              validationState={validationState}
+              initialValue={offer.title}
+            />
+          </div>
+          <div className="col-lg-3">
+            <Input
+              id="price"
+              type="number"
+              label="Price"
+              onChange={(price) => {
+                // transform input from TEXT type to NUMBER type
+                setPrice(+price);
+              }}
+              validators={[isRequired]}
+              errorMessage="Price is required"
+              validationState={validationState}
+              initialValue={offer.price}
+            />
+          </div>
+          <div className="col-lg-3">
+            <Input
+              id="new-price"
+              type="number"
+              label="New Price"
+              onChange={(newPrice) => {
+                setNewPrice(newPrice);
+              }}
+              validators={[]}
+              errorMessage=""
+              validationState={validationState}
+            />
+          </div>
+          <div className="col-lg-6 mb-3">
+            <Select
+              id="countries"
+              options={countries}
+              initialValue={offer.country}
+              label="select country"
+              onChange={(val) => setCountry(val)}
+            ></Select>
+          </div>
+          <div className="col-lg-6">
+            <Input
+              id="location"
+              type="text"
+              label="Location"
+              onChange={(location) => {
+                setLocation(location);
+              }}
+              validators={[isRequired]}
+              initialValue={offer.location}
+              errorMessage="Location is required"
+              validationState={validationState}
+            />
+          </div>
+          <div className="col-lg-6 mb-3">
+            <Select
+              id="transportation"
+              options={transport}
+              label="transportation provided"
+              initialValue={offer.transportation}
+              onChange={(val) => setTransportation(val)}
+            ></Select>
+          </div>
+          <div className="col-lg-6 mb-3">
+            <Select
+              id="travel-categories"
+              options={travelCategories}
+              initialValue={offer.category}
+              onChange={(val) => setCategory(val)}
+            ></Select>
+          </div>
+          <div className="col-12"></div>
+          <Input
+            id="description"
+            type="textarea"
+            label="Offer description"
+            initialValue={offer.description}
+            onChange={(val) => setDescription(val)}
+            validators={[isMinLength, isMaxLength]}
+            minLength={1}
+            maxLength={500}
+            errorMessage="Description is too short!"
+            validationState={validationState}
+          />
+          <div className="col-12 mb-3">
+            <ChoosePeriod
+              begins={offer.begins}
+              onBeginsChange={setBegins}
+              ends={offer.ends}
+              onEndsChange={(val) => setEnds(val)}
+            />
+          </div>
+        </div>
 
         <div className="row">
           <div className="col-12 col-lg-8">
-            <button className="btn btn-success w-100">Update</button>
+            <button className="btn btn-primary w-100">Update</button>
           </div>
           <div className="col-12 col-lg-4">
             <button
