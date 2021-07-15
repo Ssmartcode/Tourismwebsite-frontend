@@ -44,7 +44,7 @@ const AddDescription = (props) => {
           onChange={(val) => setDescription(val)}
           validators={[isMinLength, isMaxLength]}
           minLength={1}
-          maxLength={30}
+          maxLength={500}
           errorMessage="Description is too short!"
           validationState={validationState}
         />
