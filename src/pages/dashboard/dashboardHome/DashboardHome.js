@@ -22,14 +22,15 @@ const DashboardHome = () => {
           Authorization: `Bearer ${authContext.token}`,
         }
       );
-      if (response) setOffers(response.data.offers);
+      if (!error && response) setOffers(response.data.offers);
     })();
   }, [sendRequest]);
+
   return (
-    <div className="d-flex flex-column align-items-center justify-content-center w-100">
+    <div className="scrollable-container">
       {/* spinner when retreiving data from server */}
       {isLoading && <Spinner />}
-      <div className="list-group col-10 col-lg-6">
+      <div className="list-group">
         {offers.map((offer) => {
           return (
             <ListItem

@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import useHttpRequest from "../../../hooks/useHttpRequest";
 import "./Favorite.css";
 import AuthContext from "../../../context/authContext";
+import formatDate from "../../../utilities/formatDate";
+import { Link } from "react-router-dom";
 
 const Favorite = (props) => {
   const { sendRequest, error } = useHttpRequest();
@@ -28,13 +30,19 @@ const Favorite = (props) => {
       <div className="delete-favorite" onClick={handleFavoriteDeletion}>
         <i className="fas fa-times text-danger"></i>
       </div>
-      <h5 className="text-center">{props.title}</h5>
-      <div className="d-flex">
+      <h4 className="text-center">
+        <Link to={`/offers/${props.id}`}> {props.title} </Link>
+      </h4>
+
+      <div className="line"></div>
+
+      <div className="d-flex justify-content-around">
         <p className="price">
-          <strong>Price:</strong> {props.price}
+          <strong>Price:</strong> $ {props.price}
         </p>
         <p className="period">
-          <strong>Period:</strong> {props.period}
+          <strong>Period:</strong> {formatDate(props.begins)} -{" "}
+          {formatDate(props.ends)}
         </p>
       </div>
     </li>

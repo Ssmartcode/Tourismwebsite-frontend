@@ -1,6 +1,7 @@
 nav {
   padding: 0 !important;
   background: #f4f4f4;
+  opacity: 0;
 }
 nav a {
   font-size: 1.3rem;

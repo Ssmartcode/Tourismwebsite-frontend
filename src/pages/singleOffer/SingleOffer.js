@@ -63,9 +63,8 @@ const SingleOffer = () => {
               <div className="col-lg-6">
                 <OfferImages
                   image={offer.hotelId.image}
-                  imageDescription="Hotel images"
+                  imageDescription="Hotel image"
                 />
-                )
               </div>
               {/* Hotel informations */}
               <div className="col-lg-6">
@@ -82,7 +81,7 @@ const SingleOffer = () => {
         </div>
         {/* send message to organizer */}
         <SendMessage sendTo={offer.author} offerId={offer._id}>
-          <div className="message-organizer pe-3">
+          <div className="message-organizer pe-3 py-3 fw-bold fs-5">
             <span> Message the organizer</span>
           </div>
         </SendMessage>

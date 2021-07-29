@@ -30,7 +30,7 @@ const dashboardMessages = () => {
     })();
   }, []);
   return (
-    <div>
+    <div className="scrollable-container">
       {messages.length === 0 && (
         <Alert
           type="warning"

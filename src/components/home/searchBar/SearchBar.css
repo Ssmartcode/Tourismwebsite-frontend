@@ -1,0 +1,53 @@
+.search-bar {
+  background: linear-gradient(
+    to left,
+    rgba(25, 25, 25, 0.6),
+    rgba(25, 25, 25, 0.8)
+  );
+  border-radius: 5px;
+  color: #f4f4f4;
+  margin: 0 auto;
+  position: relative;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: all 0.2s;
+}
+.search-bar .title-globe {
+  width: 45px;
+}
+.search-bar input,
+.search-bar select {
+  text-align: center;
+}
+.search-bar h3 {
+  flex-basis: 100%;
+}
+.search-bar .input-group {
+  margin-bottom: 0;
+}
+
+.search-bar .search-country {
+  position: relative;
+}
+.search-bar .search-country img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 3px 0;
+  height: 100%;
+  z-index: 100;
+}
+.search-bar .search-offer__button {
+  position: absolute;
+  border: none;
+  top: 1rem;
+  right: 1.5rem;
+  background: transparent;
+  color: #fff;
+}
+.search-bar .search-offer__button:hover span {
+  color: var(--secondary-color);
+}
+.search-bar .search-offer__button img {
+  width: 40px;
+}

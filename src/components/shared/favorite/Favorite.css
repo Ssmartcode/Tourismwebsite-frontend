@@ -5,3 +5,9 @@
   top: 5px;
   right: 15px;
 }
+.favorite-item .line {
+  width: 70%;
+  height: 1px;
+  margin: 1rem auto 2rem;
+  background: rgba(50, 50, 50, 0.3);
+}

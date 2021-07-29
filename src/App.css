@@ -64,3 +64,34 @@ body {
   border: #a18513;
   color: #333;
 }
+
+.scrollable-container {
+  width: 50%;
+  height: 60vh;
+  margin: 0 auto;
+  overflow-y: auto;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: #f5f5f5;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.6);
+  background-color: #cccccc;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: #fff;
+  background-image: -webkit-linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 25%,
+    transparent 100%,
+    rgba(0, 0, 0, 1) 75%,
+    transparent
+  );
+}
