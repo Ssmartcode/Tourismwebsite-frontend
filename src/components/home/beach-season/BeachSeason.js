@@ -29,7 +29,7 @@ const BeachSeason = () => {
       <div className="section-title px-4 py-2 mb-5">
         <h3 className="mb-0 fw-bold">Most wanted beach season offer:</h3>
       </div>
-      <div className="grid-container">
+      <div className="grid-container px-3">
         <img
           className="beach-image"
           src={beachImage}
@@ -39,7 +39,8 @@ const BeachSeason = () => {
           <Card
             title={offer.title}
             category={offer.category}
-            period={offer.period}
+            begins={offer.begins}
+            ends={offer.ends}
             price={offer.price}
             newPrice={offer.newPrice}
             image={offer.image}

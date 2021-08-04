@@ -22,3 +22,12 @@
 #beach-season .offer-card {
   justify-self: center;
 }
+
+@media screen and (max-width: 1410px) {
+  #beach-season img.beach-image {
+    display: none;
+  }
+  #beach-season .grid-container {
+    display: flex;
+  }
+}

@@ -88,7 +88,7 @@ const Signup = () => {
           label="Password:"
           onChange={(password) => setUserPassword(password)}
           validators={[isPassword]}
-          errorMessage="Your password should be 8 characters long, have 1 number and 1 uppercase"
+          errorMessage="Your password should be 8 characters long, have 1 number, 1 uppercase and a special character"
           validationState={validationState}
         />
 

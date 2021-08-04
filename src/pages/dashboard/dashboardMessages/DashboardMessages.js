@@ -29,32 +29,35 @@ const dashboardMessages = () => {
       if (!error && response) setMessages(response.data.messages);
     })();
   }, []);
-  return (
-    <div className="scrollable-container">
-      {messages.length === 0 && (
-        <Alert
-          type="warning"
-          message={"Messages recieved from other users will be shown here"}
-        />
-      )}
-      <ul className="list-group">
-        {isLoading && <Spinner />}
-        {messages.map((message) => {
-          return (
-            <Message
-              title={message.title}
-              email={message.email}
-              message={message.message}
-              related={message.related}
-              id={message.id}
-              messages={messages}
-              handleMessageDeletion={(messages) => setMessages(messages)}
-            />
-          );
-        })}
-      </ul>
-    </div>
-  );
+
+  if (!messages.length)
+    return (
+      <Alert
+        type="warning"
+        message={"Messages recieved from other users will be shown here"}
+      />
+    );
+  else
+    return (
+      <div className="scrollable-container">
+        <ul className="list-group">
+          {isLoading && <Spinner />}
+          {messages.map((message) => {
+            return (
+              <Message
+                title={message.title}
+                email={message.email}
+                message={message.message}
+                related={message.related}
+                id={message.id}
+                messages={messages}
+                handleMessageDeletion={(messages) => setMessages(messages)}
+              />
+            );
+          })}
+        </ul>
+      </div>
+    );
 };
 
 export default dashboardMessages;

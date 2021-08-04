@@ -8,7 +8,7 @@ Modal.setAppElement(modal);
 
 const AddDescription = (props) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState(props.description);
 
   const { validators, validationState, allInputsValid } = useFormValidation();
   const { isMinLength, isMaxLength } = validators;
@@ -43,10 +43,11 @@ const AddDescription = (props) => {
           label="Offer description"
           onChange={(val) => setDescription(val)}
           validators={[isMinLength, isMaxLength]}
-          minLength={1}
-          maxLength={500}
+          minLength={4}
+          maxLength={1000}
           errorMessage="Description is too short!"
           validationState={validationState}
+          initialValue={props.description}
         />
         <div className="col-lg-6 mx-auto">
           <button

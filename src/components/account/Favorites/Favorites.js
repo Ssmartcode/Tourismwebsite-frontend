@@ -3,7 +3,7 @@ import useHttpRequest from "../../../hooks/useHttpRequest";
 import Favorite from "../../shared/favorite/Favorite";
 import { v4 } from "uuid";
 import Spinner from "../../shared/spinner/Spinner";
-import Pagination from "../../shared/pagination/Pagination";
+import "./Favorites.css";
 
 const Favorites = ({ authContext }) => {
   const [favorites, setFavorites] = useState([]);
@@ -30,10 +30,8 @@ const Favorites = ({ authContext }) => {
   return (
     <div className="col-lg-6">
       <div className="favorites-list">
-        {/* Loading spinner */}
-        {isLoading && <Spinner />}
         {/* Favorites */}
-        <h6 className="text-center mb-4">Your favorite tourism packages:</h6>
+        <h6 className="text-center mb-4 ">Your favorite tourism packages:</h6>
         <ul className="list-group">
           {favorites.map((fav) => (
             <Favorite
@@ -48,7 +46,8 @@ const Favorites = ({ authContext }) => {
             />
           ))}
         </ul>
-        {/* <Pagination /> */}
+        {/* Loading spinner */}
+        {isLoading && <Spinner />}
       </div>
     </div>
   );

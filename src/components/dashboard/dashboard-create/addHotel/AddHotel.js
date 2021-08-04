@@ -9,6 +9,7 @@ import useHttpRequest from "../../../../hooks/useHttpRequest";
 import AuthContext from "../../../../context/authContext";
 import ImageUpload from "../../../shared/image-upload/ImageUpload";
 import Spinner from "../../../shared/spinner/Spinner";
+import Alert from "../../../shared/alert/Alert";
 
 const modal = document.getElementById("modal");
 Modal.setAppElement(modal);
@@ -65,9 +66,8 @@ const AddHotel = (props) => {
     <React.Fragment>
       <button
         type="button"
-        className={`btn btn-secondary w-100 py-2 ${
-          props.hotelCreated && "disabled"
-        }`}
+        className={`btn btn-secondary w-100 py-2 ${props.hotelCreated &&
+          "disabled"}`}
         onClick={() => setModalIsOpen(true)}
       >
         {props.hotelCreated ? "Hotel has been added" : "Add a hotel"}
@@ -121,11 +121,11 @@ const AddHotel = (props) => {
               <Input
                 id="hotelStars"
                 type="number"
+                step={1}
+                max={5}
                 label="Hotel Stars"
                 onChange={(val) => setStars(val)}
-                validators={[isMinLength, isMaxLength]}
-                minLength={1}
-                maxLength={30}
+                validators={[isRequired]}
                 errorMessage="Address is too short!"
                 validationState={validationState}
               />
@@ -147,8 +147,12 @@ const AddHotel = (props) => {
             </button>
           </div>
         </form>
+
         {/* if loading add spinner */}
         {isLoading && <Spinner />}
+
+        {/* show error if any */}
+        {error && <Alert message={error} />}
       </Modal>
     </React.Fragment>
   );

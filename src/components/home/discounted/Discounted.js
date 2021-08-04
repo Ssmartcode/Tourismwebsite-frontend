@@ -36,7 +36,8 @@ const Discounted = () => {
                 <Card
                   title={offer.title}
                   category={offer.category}
-                  period={offer.period}
+                  begins={offer.begins}
+                  ends={offer.ends}
                   price={offer.price}
                   newPrice={offer.newPrice}
                   image={offer.image}

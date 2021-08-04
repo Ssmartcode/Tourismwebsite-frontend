@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import useHttpRequest from "../../../hooks/useHttpRequest";
 import Message from "../../shared/message/Message";
 import Spinner from "../../shared/spinner/Spinner";
+import "./Messages.css";
 
 const Messages = ({ authContext }) => {
   const { sendRequest, error, isLoading } = useHttpRequest();
@@ -28,9 +29,8 @@ const Messages = ({ authContext }) => {
 
   return (
     <div className="col-lg-6">
-      {isLoading && <Spinner />}
       <div className="sent-messages">
-        <h5 className="text-center mb-4">Messages you have sent:</h5>
+        <h6 className="text-center mb-4">Messages you have sent:</h6>
         <ul className="list-group">
           {messages.map((message) => {
             return (
@@ -47,6 +47,9 @@ const Messages = ({ authContext }) => {
             );
           })}
         </ul>
+
+        {/* LOADING SPINNER */}
+        {isLoading && <Spinner />}
       </div>
     </div>
   );

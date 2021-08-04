@@ -41,7 +41,7 @@ const SingleOffer = () => {
         />
         <div className="row g-0 px-3">
           {/* offer image */}
-          <div className="col-lg-6">
+          <div className="col-lg-6 mt-4">
             <OfferImages image={offer.image} imageDescription="Offer image" />
           </div>
           {/* Informations about the offer */}

@@ -20,7 +20,7 @@ const SendMessage = (props) => {
   const authContext = useContext(AuthContext);
 
   const { validators, validationState } = useFormValidation();
-  const { isMinLength, isMaxLength } = validators;
+  const { isMinLength, isMaxLength, isRequired } = validators;
 
   const { sendRequest, error, isLoading } = useHttpRequest();
 
@@ -58,10 +58,10 @@ const SendMessage = (props) => {
     <React.Fragment>
       <div onClick={handleModalOpen}>{props.children}</div>
       <Modal
-        className="modal"
+        className="modal send-message__modal"
         isOpen={openModal}
         onRequestClose={handleModalClose}
-        style={{ overlay: { background: "rgba(25,25,25,0.4" } }}
+        style={{ overlay: { background: "rgba(25,25,25,0.4", zIndex: 1000 } }}
       >
         {/* if user is NOT logged in display a message warning the user */}
         {!authContext.token && (
@@ -72,7 +72,7 @@ const SendMessage = (props) => {
 
         {/* if user is logged in render a modal with a form */}
         {authContext.token && (
-          <form onSubmit={handleFormSubmit}>
+          <form className="text-center" onSubmit={handleFormSubmit}>
             <h5 className="text-center mb-4">
               Send a message to the organizer:
             </h5>
@@ -82,21 +82,19 @@ const SendMessage = (props) => {
               label="Message Title:"
               onChange={(title) => setTitle(title)}
               validators={[isMinLength, isMaxLength]}
-              minLength={5}
-              maxLength={30}
+              minLength={4}
+              maxLength={50}
               errorMessage="Title should have at least 5 characters and maximum 30"
               validationState={validationState}
               initialValue=""
             />
             <Input
               id="contact-email"
-              type="text"
+              type="email"
               label="E-mail address:"
               onChange={(email) => setEmail(email)}
-              validators={[isMinLength, isMaxLength]}
-              minLength={5}
-              maxLength={30}
-              errorMessage="Email is not valid"
+              validators={[isRequired]}
+              errorMessage="Email is required"
               validationState={validationState}
               initialValue=""
             />
@@ -107,8 +105,8 @@ const SendMessage = (props) => {
               onChange={(message) => setMessage(message)}
               validators={[isMinLength, isMaxLength]}
               minLength={5}
-              maxLength={30}
-              errorMessage="Message should have at least 10 characters and maximum 150"
+              maxLength={500}
+              errorMessage="Message should have at least 5 characters and maximum 500"
               validationState={validationState}
               initialValue=""
             />

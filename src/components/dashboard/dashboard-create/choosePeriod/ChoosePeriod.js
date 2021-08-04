@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import moment from "moment";
 
 const ChoosePeriod = (props) => {
@@ -15,16 +15,17 @@ const ChoosePeriod = (props) => {
   const [offerBegins, setOfferBegins] = useState(starts);
   const [offerEnds, setOfferEnds] = useState(ends);
 
-  const handleOfferBegins = (e) => {
-    const date = e.target.value;
-    setOfferBegins(e.target.value);
-    props.onBeginsChange(new Date(date));
-  };
+  // send the data to the parent element
+  useEffect(() => {
+    props.onBeginsChange(offerBegins);
+    props.onEndsChange(offerEnds);
+  }, [offerBegins, offerEnds]);
 
+  const handleOfferBegins = (e) => {
+    setOfferBegins(e.target.value);
+  };
   const handleOfferEnds = (e) => {
-    const date = e.target.value;
     setOfferEnds(e.target.value);
-    props.onEndsChange(new Date(date));
   };
 
   return (

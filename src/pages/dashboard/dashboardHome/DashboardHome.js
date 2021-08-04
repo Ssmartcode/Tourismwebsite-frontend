@@ -26,25 +26,37 @@ const DashboardHome = () => {
     })();
   }, [sendRequest]);
 
-  return (
-    <div className="scrollable-container">
-      {/* spinner when retreiving data from server */}
-      {isLoading && <Spinner />}
-      <div className="list-group">
-        {offers.map((offer) => {
-          return (
-            <ListItem
-              key={offer._id}
-              title={offer.title}
-              paragraph={offer.category}
-              url={`/dashboard/offers/${offer._id}`}
-            />
-          );
-        })}
+  if (!offers.length)
+    return (
+      <Alert
+        type="warning"
+        message="You have not created any offer. Start creating one!"
+      />
+    );
+  else
+    return (
+      <div className="scrollable-container">
+        {/* spinner when retreiving data from server */}
+        {isLoading && <Spinner />}
+        <div className="list-group">
+          {offers.map((offer) => {
+            return (
+              <ListItem
+                key={offer._id}
+                title={offer.title}
+                category={offer.category}
+                begins={offer.begins}
+                ends={offer.ends}
+                image={offer.image}
+                paragraph={offer.category}
+                url={`/dashboard/offers/${offer._id}`}
+              />
+            );
+          })}
+        </div>
+        {error && <Alert type="danger" message={error} />}
       </div>
-      {error && <Alert type="danger" message={error} />}
-    </div>
-  );
+    );
 };
 
 export default DashboardHome;

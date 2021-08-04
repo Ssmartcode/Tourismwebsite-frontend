@@ -11,13 +11,13 @@ const Sorting = (props) => {
   }, [sorting]);
 
   return (
-    <div className="sorting d-flex justify-content-start mb-3 me-3">
+    <div className="mb-3">
       <Select
         id="sort"
         options={sortingList}
         placeholder="Sort by:"
         onChange={(val) => setSorting(val)}
-        className="sorting-select"
+        className="sorting-select w-100"
       />
     </div>
   );

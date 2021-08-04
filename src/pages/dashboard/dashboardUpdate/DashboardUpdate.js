@@ -40,6 +40,7 @@ const DashboardUpdate = () => {
   const offerId = useParams().id;
   let history = useHistory();
 
+  // get informations about the offer
   useEffect(() => {
     (async () => {
       let response;
@@ -55,6 +56,7 @@ const DashboardUpdate = () => {
     })();
   }, [sendRequest, offerId, setOffer]);
 
+  // handle delete button press - send request to delete the offer
   const handleOfferDelete = async (e) => {
     e.preventDefault();
     try {
@@ -71,6 +73,7 @@ const DashboardUpdate = () => {
     } catch (err) {}
   };
 
+  // handle update button press - update the offer
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
@@ -84,6 +87,7 @@ const DashboardUpdate = () => {
     formData.append("location", location);
     formData.append("transportation", transportation);
     formData.append("country", country);
+    console.log(category);
     //! formData.append("image", image);
 
     // if (allInputsValid(validationState.current)) {
@@ -222,7 +226,7 @@ const DashboardUpdate = () => {
           <div className="col-12 mb-3">
             <ChoosePeriod
               begins={offer.begins}
-              onBeginsChange={setBegins}
+              onBeginsChange={(val) => setBegins(val)}
               ends={offer.ends}
               onEndsChange={(val) => setEnds(val)}
             />

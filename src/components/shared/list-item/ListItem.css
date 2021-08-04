@@ -1,0 +1,21 @@
+.dashboard-offer .title {
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+.dashboard-offer .category {
+  background: rgba(25, 25, 25, 0.7);
+  padding: 0.25rem 0.5rem;
+  border-radius: 15px;
+  color: #fff;
+  font-weight: 900;
+}
+
+.dashboard-offer img {
+  width: 100%;
+  margin-right: 10px;
+}
+
+.dashboard-offer .period img {
+  width: 30px;
+}

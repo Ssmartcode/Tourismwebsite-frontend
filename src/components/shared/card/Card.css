@@ -81,3 +81,6 @@
   background: var(--primary-color);
   border: var(--primary-color);
 }
+.offer-card.most-wanted .read-more:hover {
+  opacity: 0.8;
+}

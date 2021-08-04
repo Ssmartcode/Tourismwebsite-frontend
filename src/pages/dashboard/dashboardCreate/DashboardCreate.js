@@ -79,9 +79,7 @@ const CreateOffer = () => {
       }
 
       // set the response we get from the server
-      if (response) setRequestResponse(response);
-    } else {
-      console.log("Not all inputs are valid");
+      if (response && !error) setRequestResponse(response);
     }
   };
 
@@ -91,6 +89,21 @@ const CreateOffer = () => {
         <img className="new-offer__image me-3" src={globe} alt="" />
         <h2 className="text-center mb-0">Add a new offer</h2>{" "}
       </div>
+
+      {/* error from server after submiting form */}
+      {error && (
+        <div className="col-lg-6 mx-auto">
+          <Alert message={error} />
+        </div>
+      )}
+
+      {/*If no error recieved from server display success message*/}
+      {requestResponse && !error && (
+        <div className="col-lg-6 mx-auto">
+          <Alert type="success" message={requestResponse.data.message} />
+        </div>
+      )}
+
       <div className="create-offer">
         <div className="row mb-3">
           <div className="col-lg-6">
@@ -105,6 +118,7 @@ const CreateOffer = () => {
             />
           </div>
         </div>
+        {/* form to submit new offer */}
         <form onSubmit={handleFormSubmit}>
           <div className="row">
             <div className="col-lg-6">
@@ -114,9 +128,9 @@ const CreateOffer = () => {
                 label="Title"
                 onChange={(title) => setTitle(title)}
                 validators={[isMinLength, isMaxLength]}
-                minLength={5}
+                minLength={4}
                 maxLength={30}
-                errorMessage="Title should have at least 5 characters and maximum 30"
+                errorMessage="Title should have at least 4 characters and maximum 30"
                 validationState={validationState}
                 initialValue=""
               />
@@ -153,8 +167,10 @@ const CreateOffer = () => {
                 onChange={(location) => {
                   setLocation(location);
                 }}
-                validators={[isRequired]}
-                errorMessage="Location is required"
+                validators={[isMinLength, isMaxLength]}
+                minLength={4}
+                maxLength={30}
+                errorMessage="Location should have at least 4 characters and maximum 30"
                 validationState={validationState}
               />
             </div>
@@ -186,7 +202,10 @@ const CreateOffer = () => {
               />
             </div>
             <div className="col-lg-4">
-              <AddDescription onSubmitModal={(val) => setDescription(val)} />
+              <AddDescription
+                onSubmitModal={(val) => setDescription(val)}
+                description={description}
+              />
             </div>
 
             <div className="col-lg-4 mx-auto">
@@ -200,16 +219,6 @@ const CreateOffer = () => {
 
       {/* spinning circle */}
       {isLoading && <Spinner />}
-
-      {/* error from server after submiting form */}
-      {error && <Alert message={error} />}
-
-      {/*If no error recieved from server display success message*/}
-      {requestResponse && !error && (
-        <div className="col-lg-6 mx-auto">
-          <Alert type="success" message={requestResponse.data.message} />
-        </div>
-      )}
     </div>
   );
 };

@@ -76,6 +76,8 @@ const Input = (props) => {
           onBlur={() => {
             setInputTouched(true);
           }}
+          step={props.step}
+          max={props.max}
           className={!isInputValid && inputTouched ? "invalid" : ""}
           ref={inputRef}
           type={props.type}

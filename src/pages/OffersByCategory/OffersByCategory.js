@@ -54,19 +54,22 @@ const OffersByCategory = () => {
   }, [category, currPage, sorting, filtersList]);
 
   return (
-    <div className="container">
-      <h3 className="my-5">
-        Offers by category (
-        {category
-          .split("-")
-          .join(" ")
-          .toUpperCase()}
+    <div className="container ">
+      <h4 className="my-5 fw-bold">
+        Offers by category ({category.split("-").join(" ")}
         ):
-      </h3>
-      <div className="d-flex">
-        <Sorting onChange={(val) => setSorting(val)} />
-        <Filters onChange={(val) => setFiltersList(val)} />
+      </h4>
+      <div className="row">
+        <div className="col-lg-2  ">
+          <Sorting onChange={(val) => setSorting(val)} />
+        </div>
+        <div className="col-lg-10">
+          <Filters onChange={(val) => setFiltersList(val)} />
+        </div>
       </div>
+      {!offers.length && !isLoading && (
+        <h2 className="fw-bold text-center mt-5">No offer found!</h2>
+      )}
       <div className="row mb-3 justify-content-between">
         {isLoading && <Spinner />}
         {offers.map((offer) => {
@@ -75,7 +78,7 @@ const OffersByCategory = () => {
               <Card
                 title={offer.title}
                 category={offer.category}
-                begings={offer.begins}
+                begins={offer.begins}
                 ends={offer.ends}
                 price={offer.price}
                 newPrice={offer.newPrice}

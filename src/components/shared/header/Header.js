@@ -23,7 +23,10 @@ const Header = () => {
     <React.Fragment>
       {/* MOVING NAVIGATION */}
       <motion.nav
-        animate={{ opacity: displayMovingNav ? 1 : 0 }}
+        animate={{
+          opacity: displayMovingNav ? 1 : 0,
+          zIndex: displayMovingNav ? 1000 : -1,
+        }}
         className="moving-navigation"
       >
         <div className="navbar-brand">
@@ -95,6 +98,8 @@ const Header = () => {
                   </li>
                 </ul>
               </div>
+
+              {/* display these links based on whether the user is authenticated or not */}
               {!authContext.token && (
                 <li className="nav-item">
                   <Link to="/user/authentication" className="nav-link">
