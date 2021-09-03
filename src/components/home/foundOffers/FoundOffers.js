@@ -42,7 +42,7 @@ const FoundOffers = (props) => {
             <Card
               title={offer.title}
               category={offer.category}
-              begings={offer.begins}
+              begins={offer.begins}
               ends={offer.ends}
               price={offer.price}
               newPrice={offer.newPrice}

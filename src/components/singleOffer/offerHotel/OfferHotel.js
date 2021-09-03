@@ -1,5 +1,6 @@
 import React from "react";
 import "./OfferHotel.css";
+import { v4 } from "uuid";
 
 const OfferHotel = (props) => {
   return (
@@ -13,7 +14,7 @@ const OfferHotel = (props) => {
       <p>
         <strong>Stars</strong>:{" "}
         {[...Array(props.stars).keys()].map((_) => (
-          <span role="img" aria-label="star">
+          <span key={v4()} role="img" aria-label="star">
             &#11088;
           </span>
         ))}
@@ -24,7 +25,7 @@ const OfferHotel = (props) => {
       <h5 className="text-center mt-4 mb-2 fw-bold">Features:</h5>
       <ul className="features">
         {props.facilities.map((facility) => (
-          <li>
+          <li key={v4()}>
             <span role="img" aria-label="facility">
               &#9989;
             </span>

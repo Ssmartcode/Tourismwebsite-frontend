@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
@@ -35,7 +35,7 @@ const searchBar = () => {
   const { validators, validationState } = useFormValidation();
   const { isRequired } = validators;
 
-  const { sendRequest, error, isLoading } = useHttpRequest();
+  const { sendRequest, error } = useHttpRequest();
   useEffect(() => {
     if (inView) setMoveSearchBar(true);
   }, [inView]);

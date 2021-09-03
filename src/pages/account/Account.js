@@ -22,7 +22,7 @@ const Account = () => {
         <Messages authContext={authContext} />
       </div>
       <p onClick={handleLogout} className="logout text-end py-5 fw-bold fs-5">
-        <img src={logoutIcon} class="logout-icon" alt="" />
+        <img src={logoutIcon} className="logout-icon" alt="" />
         <span>Log out</span>
       </p>
     </div>
