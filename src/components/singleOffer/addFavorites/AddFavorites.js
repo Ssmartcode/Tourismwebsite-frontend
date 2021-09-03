@@ -14,8 +14,8 @@ const AddFavorites = (props) => {
     try {
       await sendRequest(
         "POST",
-        "http://localhost:5000/users/favorites/add",
-        { offerId: props.offerId },
+        "http://localhost:5000/users/favorites/add/" + props.offerId,
+        {},
         {
           Authorization: `Bearer ${authContext.token}`,
         }
