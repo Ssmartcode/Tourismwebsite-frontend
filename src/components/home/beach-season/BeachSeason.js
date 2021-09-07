@@ -25,7 +25,6 @@ const BeachSeason = () => {
 
   return (
     <React.Fragment>
-      {isLoading && <Spinner />}
       <div className="section-title px-4 py-2 mb-5">
         <h3 className="mb-0 fw-bold">Most wanted beach season offer:</h3>
       </div>
@@ -48,6 +47,7 @@ const BeachSeason = () => {
             readMoreLink={`/offers/${offer._id}`}
           ></Card>
         )}
+        {isLoading && <Spinner textLight />}
       </div>
       .
     </React.Fragment>
